@@ -5,6 +5,6 @@ moim android application repository
 
 Kotlin
 
-## Minimum andoird api
+## Minimum android api
 
 24 +
