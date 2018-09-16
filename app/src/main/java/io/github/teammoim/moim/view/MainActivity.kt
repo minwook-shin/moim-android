@@ -11,6 +11,10 @@ import io.github.teammoim.moim.R
 import io.github.teammoim.moim.view.fragment.TimeLineFragment
 import io.github.teammoim.moim.view.fragment.ARFragment
 import io.github.teammoim.moim.view.fragment.SettingFragment
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -41,13 +45,15 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         val bottomNavigationView = findViewById<View>(R.id.navigation_view) as BottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
-
-        // Creates the request with the permissions you would like to request.
-        val request = permissionsBuilder(Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_NETWORK_STATE).build()
-        // Send the request when you want.
-        request.send()
     }
 
+    override fun onBackPressed() {
+        alert("정말로 종료하시겠습니까?", "확인") {
+            yesButton { finishAffinity()
+                System.runFinalization()
+                System.exit(0) }
+        }.show()
+    }
 }
 
 

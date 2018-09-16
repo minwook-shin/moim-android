@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.fragment_a.*
 class TimeLineFragment : BaseFragment(){
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
-    private val observer = Observer<Int> { it ->
-        it?.let { printCount(it)}
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_a,container,false)
     }
@@ -35,7 +31,7 @@ class TimeLineFragment : BaseFragment(){
     }
 
     private fun connectViewModel(){
-        viewModel.model.observe(this,observer)
+        viewModel.model.observe(this,Observer<Int> { printCount(it!!)})
         lifecycle.addObserver(viewModel)
     }
 
