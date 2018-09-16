@@ -3,6 +3,7 @@ package io.github.teammoim.moim.view
 import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.View
 import com.fondesa.kpermissions.extension.listeners
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import io.github.teammoim.moim.R
@@ -10,6 +11,7 @@ import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.viewModel.IntroViewModel
 import kotlinx.android.synthetic.main.activity_intro.*
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
 
 class IntroActivity : BaseActivity(){
     private val viewModel by lazy { ViewModelProviders.of(this).get(IntroViewModel::class.java) }
@@ -28,6 +30,7 @@ class IntroActivity : BaseActivity(){
             if(viewModel.checkEmail(emailText.text.toString())){
                 startActivity(intentFor<MainActivity>().clearTop().singleTop())
             }
+            joinButton.snackbar("이메일 형식이 아닙니다.")
         }
     }
 
