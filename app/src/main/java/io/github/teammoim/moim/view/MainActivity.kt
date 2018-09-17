@@ -1,6 +1,8 @@
 package io.github.teammoim.moim.view
 
 import android.Manifest
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
@@ -8,13 +10,11 @@ import android.view.View
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.R
+import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.view.fragment.TimeLineFragment
 import io.github.teammoim.moim.view.fragment.ARFragment
 import io.github.teammoim.moim.view.fragment.SettingFragment
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.yesButton
+import org.jetbrains.anko.*
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
@@ -45,13 +45,15 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         val bottomNavigationView = findViewById<View>(R.id.navigation_view) as BottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
+
+        if (FirebaseManager.getUserEmail() == null){
+            startActivity(intentFor<IntroActivity>().clearTop())
+        }
     }
 
     override fun onBackPressed() {
         alert("정말로 종료하시겠습니까?", "확인") {
-            yesButton { finishAffinity()
-                System.runFinalization()
-                System.exit(0) }
+            yesButton {super.onBackPressed() }
         }.show()
     }
 }

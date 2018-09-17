@@ -23,11 +23,11 @@ object FirebaseManager{
 
     fun signOut() = getAuth().signOut()
 
-    fun getEmailSignUp(mAuth: FirebaseAuth, email: String, password: String): Task<AuthResult> {
-        return mAuth.createUserWithEmailAndPassword(email, password)
+    fun getEmailSignUp(email: String, password: String): Task<AuthResult> {
+        return mAuth. createUserWithEmailAndPassword(email, password)
     }
 
-    fun getEmailLogIn(mAuth: FirebaseAuth, email: String, password: String): Task<AuthResult> {
+    fun getEmailLogIn(email: String, password: String): Task<AuthResult> {
         return mAuth.signInWithEmailAndPassword(email, password)
     }
 

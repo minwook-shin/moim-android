@@ -2,7 +2,7 @@
 
 AR-based social services with timeline for uploading events and activities.
 
-## Languege
+## Language
 
 Kotlin
 
