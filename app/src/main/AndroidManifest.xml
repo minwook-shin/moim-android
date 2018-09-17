@@ -19,13 +19,18 @@
         android:theme="@style/AppTheme">
         <service android:name=".AppService" />
         <meta-data android:name="com.google.ar.core" android:value="required" />
-        <activity android:name=".view.IntroActivity">
+        <activity android:name=".view.MainActivity"
+            android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.IntroActivity"
+            android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true"/>
     </application>
 
 </manifest>
