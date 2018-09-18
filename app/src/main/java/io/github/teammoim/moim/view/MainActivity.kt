@@ -48,6 +48,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         if (FirebaseManager.getUserEmail() == null){
             startActivity(intentFor<IntroActivity>().clearTop())
+            finish()
         }
     }
 

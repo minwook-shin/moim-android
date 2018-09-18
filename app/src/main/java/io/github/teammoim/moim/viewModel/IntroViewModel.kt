@@ -19,10 +19,25 @@ class IntroViewModel() : ViewModel(), LifecycleObserver {
 
     fun signUp(email : String, password : String){
         FirebaseManager.getEmailSignUp(email,password).addOnCompleteListener{
+            if (it.isSuccessful) {
             App.INSTANCE.longToast("회원가입 성공")
-            App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())
+            App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
         }.addOnCanceledListener {
             App.INSTANCE.longToast("회원가입 실패")
+        }.addOnFailureListener {
+            App.INSTANCE.longToast("회원가입 실패")
+        }
+    }
+
+    fun login(email : String, password : String){
+        FirebaseManager.getEmailLogIn(email,password).addOnCompleteListener {
+            if (it.isSuccessful) {
+            App.INSTANCE.longToast("로그인 성공")
+            App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
+        }.addOnCanceledListener {
+            App.INSTANCE.longToast("로그인 실패")
+        }.addOnFailureListener {
+            App.INSTANCE.longToast("로그인 실패")
         }
     }
 

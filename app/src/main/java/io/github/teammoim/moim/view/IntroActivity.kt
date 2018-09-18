@@ -7,6 +7,10 @@ import com.fondesa.kpermissions.extension.listeners
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
+import io.github.teammoim.moim.common.hide
+import io.github.teammoim.moim.common.remove
+import io.github.teammoim.moim.common.show
+import io.github.teammoim.moim.common.toggleVisibility
 import io.github.teammoim.moim.viewModel.IntroViewModel
 import kotlinx.android.synthetic.main.activity_intro.*
 import org.jetbrains.anko.*
@@ -14,6 +18,8 @@ import org.jetbrains.anko.design.snackbar
 
 class IntroActivity : BaseActivity() {
     private val viewModel by lazy { ViewModelProviders.of(this).get(IntroViewModel::class.java) }
+
+    var signUpMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +33,49 @@ class IntroActivity : BaseActivity() {
 
     private fun clickEvent(): Unit {
         joinButton.setOnClickListener {
-            if (!viewModel.checkEmail(emailText.text.toString())) {
-                joinButton.snackbar("이메일 형식이 아닙니다.")
-            }else if (!viewModel.checkPassword((passwordText.text.toString()))) {
-                joinButton.snackbar("비밀번호는 6자리 이상 입력해야 합니다.")
+            if (signUpMode){
+                if (!viewModel.checkEmail(emailText.text.toString())) {
+                    joinButton.snackbar("이메일 형식이 아닙니다.")
+                }else if (!viewModel.checkPassword((passwordText.text.toString()))) {
+                    joinButton.snackbar("비밀번호는 6자리 이상 입력해야 합니다.")
+                }
+                else if (viewModel.checkEmpty((nameText.text.toString()))) {
+                    joinButton.snackbar("이름은 비워둘 수 없습니다.")
+                }
+                else if (viewModel.checkEmpty((nickNameText.text.toString()))) {
+                    joinButton.snackbar("닉네임은 비워둘 수 없습니다.")
+                }else {
+                    viewModel.signUp(emailText.text.toString(),passwordText.text.toString())
+                    finish()
+                }
             }
-            else if (viewModel.checkEmpty((nameText.text.toString()))) {
-                joinButton.snackbar("이름은 비워둘 수 없습니다.")
+            else if (!signUpMode){
+                nicknameBox.show()
+                nameBox.show()
+                signUpMode = true
+                introText.text = "안녕하세요. MOIM에 처음 오셨나요?"
             }
-            else if (viewModel.checkEmpty((nickNameText.text.toString()))) {
-                joinButton.snackbar("닉네임은 비워둘 수 없습니다.")
-            }else {
-                viewModel.signUp(emailText.text.toString(),passwordText.text.toString())
+
+
+        }
+
+        loginButton.setOnClickListener {
+            if (signUpMode){
+                nicknameBox.remove()
+                nameBox.remove()
+                signUpMode = false
+                introText.text = "MOIM에 다시 방문하셨군요."
+            }
+            else{
+                if (!viewModel.checkEmail(emailText.text.toString())) {
+                    loginButton.snackbar("이메일 형식이 아닙니다.")
+                }else if (!viewModel.checkPassword((passwordText.text.toString()))) {
+                    loginButton.snackbar("비밀번호는 6자리 이상 입력해야 합니다.")
+                }
+                else{
+                    viewModel.login(emailText.text.toString(),passwordText.text.toString())
+                    finish()
+                }
             }
         }
     }
@@ -75,9 +112,7 @@ class IntroActivity : BaseActivity() {
     override fun onBackPressed() {
         alert("정말로 종료하시겠습니까?", "확인") {
             yesButton {
-                finishAffinity()
-                System.runFinalization()
-                System.exit(0)
+                super.onBackPressed()
             }
         }.show()
     }
