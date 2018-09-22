@@ -22,7 +22,8 @@
         <activity android:name=".view.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"
-            android:clearTaskOnLaunch="true">
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.IntroActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"/>
     </application>
