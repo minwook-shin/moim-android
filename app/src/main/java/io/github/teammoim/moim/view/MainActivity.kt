@@ -56,6 +56,10 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         account.setOnClickListener {
             startActivity<ProfileActivity>()
         }
+
+        notification_click.setOnClickListener {
+            startActivity<NoticeActivity>()
+        }
     }
 
     override fun onBackPressed() {

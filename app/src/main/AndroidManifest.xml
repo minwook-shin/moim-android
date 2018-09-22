@@ -36,6 +36,7 @@
             android:clearTaskOnLaunch="true"/>
         <activity android:name=".view.ProfileActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".view.NoticeActivity" />
     </application>
 
 </manifest>
