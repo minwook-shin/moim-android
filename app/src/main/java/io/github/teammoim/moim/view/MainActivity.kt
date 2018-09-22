@@ -14,6 +14,8 @@ import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.view.fragment.TimeLineFragment
 import io.github.teammoim.moim.view.fragment.ARFragment
 import io.github.teammoim.moim.view.fragment.SettingFragment
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import org.jetbrains.anko.*
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +51,10 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if (FirebaseManager.getUserEmail() == null){
             startActivity(intentFor<IntroActivity>().clearTop())
             finish()
+        }
+
+        account.setOnClickListener {
+            startActivity<ProfileActivity>()
         }
     }
 
