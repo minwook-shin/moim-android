@@ -74,6 +74,7 @@ class IntroActivity : BaseActivity() {
                 }
                 else{
                     viewModel.login(emailText.text.toString(),passwordText.text.toString())
+                    Thread.sleep(10000)
                     finish()
                 }
             }
