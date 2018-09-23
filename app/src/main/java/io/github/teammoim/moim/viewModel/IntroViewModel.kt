@@ -33,12 +33,12 @@ class IntroViewModel() : ViewModel(), LifecycleObserver {
     fun login(email : String, password : String){
         FirebaseManager.getEmailLogIn(email,password).addOnCompleteListener {
             if (it.isSuccessful) {
-            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_success))
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_success))
             App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
         }.addOnCanceledListener {
-            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_fail))
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_fail))
         }.addOnFailureListener {
-            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_fail))
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_fail))
         }
     }
 

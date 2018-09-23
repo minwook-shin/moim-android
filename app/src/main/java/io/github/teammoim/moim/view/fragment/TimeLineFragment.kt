@@ -15,14 +15,14 @@ import android.webkit.WebViewClient
 import io.github.teammoim.moim.base.BaseFragment
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.viewModel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_a.*
+import kotlinx.android.synthetic.main.fragment_timeline.*
 
 class TimeLineFragment : BaseFragment(){
     val url = "http://m.naver.com"
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_a,container,false)
+        return inflater.inflate(R.layout.fragment_timeline,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

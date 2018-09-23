@@ -1,15 +1,9 @@
 package io.github.teammoim.moim.base
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
+import android.widget.LinearLayout
 
-open class BaseView: ConstraintLayout {
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+open class BaseView(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
 
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-    }
 }

@@ -13,4 +13,6 @@
     <string name="signup_success">회원가입 성공</string>
     <string name="signup_fail">회원가입 실패</string>
     <string name="not_implemented">Not yet implemented</string>
+    <string name="login_success">로그인 성공</string>
+    <string name="login_fail">로그인 실패</string>
 </resources>
