@@ -49,7 +49,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         if (FirebaseManager.getUserEmail() == null){
-            startActivity(intentFor<IntroActivity>().clearTop())
+            startActivity(intentFor<IntroActivity>().clearTop().noHistory())
             finish()
         }
 

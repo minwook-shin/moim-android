@@ -46,8 +46,6 @@ class IntroActivity : BaseActivity() {
                     joinButton.snackbar(getString(R.string.not_valid_nickname))
                 }else {
                     viewModel.signUp(emailText.text.toString(),passwordText.text.toString())
-                    Thread.sleep(10000)
-                    finish()
                 }
             }
             else if (!signUpMode){
@@ -75,8 +73,6 @@ class IntroActivity : BaseActivity() {
                 }
                 else{
                     viewModel.login(emailText.text.toString(),passwordText.text.toString())
-                    Thread.sleep(10000)
-                    finish()
                 }
             }
         }
