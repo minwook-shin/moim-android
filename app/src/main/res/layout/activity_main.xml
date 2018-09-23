@@ -34,7 +34,8 @@
             android:longClickable="false"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:text="@string/app_name" />
+            android:text="@string/app_name"
+            android:fontFamily="@font/nanum_gothic_regular"/>
 
         <ImageView
             android:id="@+id/notification_click"

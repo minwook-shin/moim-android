@@ -17,5 +17,6 @@
         android:layout_height="wrap_content"
         android:text="Logout"
         android:textSize="@dimen/dp_40"
-        android:layout_marginTop="7dp"/>
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/nanum_gothic_regular"/>
 </LinearLayout>

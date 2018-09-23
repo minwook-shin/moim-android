@@ -7,10 +7,7 @@ import com.fondesa.kpermissions.extension.listeners
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
-import io.github.teammoim.moim.common.hide
-import io.github.teammoim.moim.common.remove
-import io.github.teammoim.moim.common.show
-import io.github.teammoim.moim.common.toggleVisibility
+import io.github.teammoim.moim.common.*
 import io.github.teammoim.moim.viewModel.IntroViewModel
 import kotlinx.android.synthetic.main.activity_intro.*
 import org.jetbrains.anko.*
@@ -24,10 +21,11 @@ class IntroActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
-
         requestPermission()
         clickEvent()
         connectViewModel()
+
+        hideSoftKeyboard()
     }
 
 

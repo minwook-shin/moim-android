@@ -28,9 +28,10 @@
             android:id="@+id/chatText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="채팅을 하려면 이 곳에 입력하세요."
+            android:hint="타임라인에 글을 올리기."
             android:inputType="textPersonName"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:fontFamily="@font/nanum_gothic_regular"/>
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>
