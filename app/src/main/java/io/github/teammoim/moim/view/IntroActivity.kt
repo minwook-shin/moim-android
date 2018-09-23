@@ -35,17 +35,18 @@ class IntroActivity : BaseActivity() {
         joinButton.setOnClickListener {
             if (signUpMode){
                 if (!viewModel.checkEmail(emailText.text.toString())) {
-                    joinButton.snackbar("이메일 형식이 아닙니다.")
+                    joinButton.snackbar(getString(R.string.not_valid_email))
                 }else if (!viewModel.checkPassword((passwordText.text.toString()))) {
-                    joinButton.snackbar("비밀번호는 6자리 이상 입력해야 합니다.")
+                    joinButton.snackbar(getString(R.string.not_valid_password))
                 }
                 else if (viewModel.checkEmpty((nameText.text.toString()))) {
-                    joinButton.snackbar("이름은 비워둘 수 없습니다.")
+                    joinButton.snackbar(getString(R.string.not_valid_name))
                 }
                 else if (viewModel.checkEmpty((nickNameText.text.toString()))) {
-                    joinButton.snackbar("닉네임은 비워둘 수 없습니다.")
+                    joinButton.snackbar(getString(R.string.not_valid_nickname))
                 }else {
                     viewModel.signUp(emailText.text.toString(),passwordText.text.toString())
+                    Thread.sleep(10000)
                     finish()
                 }
             }
@@ -53,7 +54,7 @@ class IntroActivity : BaseActivity() {
                 nicknameBox.show()
                 nameBox.show()
                 signUpMode = true
-                introText.text = "안녕하세요. MOIM에 처음 오셨나요?"
+                introText.text = getString(R.string.wellcome)
             }
 
 
@@ -64,13 +65,13 @@ class IntroActivity : BaseActivity() {
                 nicknameBox.remove()
                 nameBox.remove()
                 signUpMode = false
-                introText.text = "MOIM에 다시 방문하셨군요."
+                introText.text = getString(R.string.visit)
             }
             else{
                 if (!viewModel.checkEmail(emailText.text.toString())) {
-                    loginButton.snackbar("이메일 형식이 아닙니다.")
+                    loginButton.snackbar(getString(R.string.not_valid_email))
                 }else if (!viewModel.checkPassword((passwordText.text.toString()))) {
-                    loginButton.snackbar("비밀번호는 6자리 이상 입력해야 합니다.")
+                    loginButton.snackbar(getString(R.string.not_valid_password))
                 }
                 else{
                     viewModel.login(emailText.text.toString(),passwordText.text.toString())
@@ -90,17 +91,17 @@ class IntroActivity : BaseActivity() {
         request.send()
         request.listeners {
             onAccepted { permissions ->
-                longToast("모든 권한이 승인되었습니다.")
+                longToast(getString(R.string.all_permission_okay))
             }
 
             onDenied { permissions ->
-                longToast("모든 권한이 거부되었습니다.")
+                longToast(getString(R.string.all_permission_deny))
                 val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE).build()
                 reRequest.send()
             }
 
             onPermanentlyDenied { permissions ->
-                longToast(permissions.toString() + "일부 권한이 거부되었습니다.")
+                longToast(permissions.toString())
                 val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE).build()
                 reRequest.send()
             }
@@ -111,7 +112,7 @@ class IntroActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        alert("정말로 종료하시겠습니까?", "확인") {
+        alert(getString(R.string.exit), getString(R.string.okay)) {
             yesButton {
                 super.onBackPressed()
             }

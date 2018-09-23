@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MOIM</string>
+    <string name="exit">정말로 종료하시겠습니까?</string>
+    <string name="okay">확인</string>
+    <string name="wellcome">안녕하세요. MOIM에 처음 오셨나요?</string>
+    <string name="visit">MOIM에 다시 방문하셨군요.</string>
+    <string name="not_valid_email">이메일 형식이 아닙니다.</string>
+    <string name="not_valid_password">비밀번호는 6자리 이상 입력해야 합니다.</string>
+    <string name="not_valid_name">이름은 비워둘 수 없습니다.</string>
+    <string name="not_valid_nickname">닉네임은 비워둘 수 없습니다.</string>
+    <string name="all_permission_okay">모든 권한이 승인되었습니다.</string>
+    <string name="all_permission_deny">모든 권한이 거부되었습니다.</string>
+    <string name="signup_success">회원가입 성공</string>
+    <string name="signup_fail">회원가입 실패</string>
+    <string name="not_implemented">Not yet implemented</string>
 </resources>

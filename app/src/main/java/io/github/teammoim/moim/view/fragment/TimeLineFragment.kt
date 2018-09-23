@@ -12,15 +12,13 @@ import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
-import io.github.teammoim.moim.App
 import io.github.teammoim.moim.base.BaseFragment
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_a.*
-import org.jetbrains.anko.toast
 
 class TimeLineFragment : BaseFragment(){
+    val url = "http://m.naver.com"
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,18 +54,12 @@ class TimeLineFragment : BaseFragment(){
         // Set web view client
         webTimeline.webViewClient = object: WebViewClient(){
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
-                // Page loading started
-                // Do something
-                App.INSTANCE.toast("loading...")
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                // Page loading finished
-                // Display the loaded page title in a toast message
-                App.INSTANCE.toast("Page loaded: ${view.title}")
             }
         }
-        webTimeline.loadUrl("http://m.naver.com")
+        webTimeline.loadUrl(url)
     }
 
     private fun connectViewModel(){

@@ -63,7 +63,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun onBackPressed() {
-        alert("정말로 종료하시겠습니까?", "확인") {
+        alert(getString(R.string.exit), getString(R.string.okay)) {
             yesButton {super.onBackPressed() }
         }.show()
     }
