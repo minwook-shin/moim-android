@@ -8,14 +8,14 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_exit_to_app_black_24dp"
+        android:src="@drawable/ic_code_black_24dp"
         android:minHeight="@dimen/dp_40"
         android:minWidth="@dimen/dp_40"
         android:layout_marginEnd="@dimen/dp_10" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="Opensource License"
         android:textSize="@dimen/sp_16"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nanum_gothic_regular"/>

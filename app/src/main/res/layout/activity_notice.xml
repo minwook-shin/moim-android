@@ -3,8 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/sp_16">
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:elevation="2dp"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/prevButton"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_left_black_24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/button_shadow"/>
+
+        <TextView
+            android:id="@+id/tv_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:focusable="false"
+            android:longClickable="false"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/app_name"
+            android:fontFamily="@font/nanum_gothic_regular"/>
+
+    </Toolbar>
 
     <TextView
         android:id="@+id/recentText"
@@ -13,7 +45,9 @@
         android:text="최근 알림"
         android:textStyle="bold"
         android:textSize="@dimen/dp_72"
-        android:fontFamily="@font/nanum_gothic_regular"/>
+        android:fontFamily="@font/nanum_gothic_regular"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_margin="@dimen/sp_16"/>
 
     <TextView
         android:id="@+id/allText"
@@ -23,6 +57,7 @@
         android:textStyle="bold"
         android:textSize="@dimen/dp_72"
         app:layout_constraintTop_toBottomOf="@id/recentText"
-        android:fontFamily="@font/nanum_gothic_regular"/>
+        android:fontFamily="@font/nanum_gothic_regular"
+        android:layout_margin="@dimen/sp_16"/>
 
 </android.support.constraint.ConstraintLayout>
