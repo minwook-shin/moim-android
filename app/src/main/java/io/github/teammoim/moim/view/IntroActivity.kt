@@ -3,8 +3,10 @@ package io.github.teammoim.moim.view
 import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import com.blankj.utilcode.util.NetworkUtils
 import com.fondesa.kpermissions.extension.listeners
 import com.fondesa.kpermissions.extension.permissionsBuilder
+import io.github.teammoim.moim.App
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.common.*
@@ -25,9 +27,19 @@ class IntroActivity : BaseActivity() {
         clickEvent()
         connectViewModel()
 
-        hideSoftKeyboard()
+        isConnectNetwork()
     }
 
+
+    private fun isConnectNetwork(){
+        if (!NetworkUtils.isConnected()){
+            alert("네트워크에 연결되지 않았습니다. 와이파이에 연결하시겠습니까?", App.INSTANCE.getString(R.string.okay)) {
+                yesButton {
+                    NetworkUtils.setWifiEnabled(true)
+                }
+            }.show()
+        }
+    }
 
     private fun clickEvent(): Unit {
         joinButton.setOnClickListener {
@@ -43,6 +55,7 @@ class IntroActivity : BaseActivity() {
                 else if (viewModel.checkEmpty((nickNameText.text.toString()))) {
                     joinButton.snackbar(getString(R.string.not_valid_nickname))
                 }else {
+                    loading.show()
                     viewModel.signUp(emailText.text.toString(),passwordText.text.toString())
                 }
             }
@@ -70,6 +83,7 @@ class IntroActivity : BaseActivity() {
                     loginButton.snackbar(getString(R.string.not_valid_password))
                 }
                 else{
+                    loading.show()
                     viewModel.login(emailText.text.toString(),passwordText.text.toString())
                 }
             }
@@ -81,7 +95,7 @@ class IntroActivity : BaseActivity() {
     }
 
     private fun requestPermission(): Unit {
-        val request = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE).build()
+        val request = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CHANGE_WIFI_STATE).build()
         request.send()
         request.listeners {
             onAccepted { permissions ->
@@ -90,13 +104,13 @@ class IntroActivity : BaseActivity() {
 
             onDenied { permissions ->
                 longToast(getString(R.string.all_permission_deny))
-                val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE).build()
+                val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CHANGE_WIFI_STATE).build()
                 reRequest.send()
             }
 
             onPermanentlyDenied { permissions ->
                 longToast(permissions.toString())
-                val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE).build()
+                val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CHANGE_WIFI_STATE).build()
                 reRequest.send()
             }
 

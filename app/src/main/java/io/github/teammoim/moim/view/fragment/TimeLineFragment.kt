@@ -34,28 +34,21 @@ class TimeLineFragment : BaseFragment(){
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadWebView(){
         val set = webTimeline.settings
-
         set.javaScriptEnabled = true
         set.setAppCacheEnabled(true)
         set.cacheMode = WebSettings.LOAD_DEFAULT
-
         set.setSupportZoom(false)
         set.builtInZoomControls = false
         set.displayZoomControls = false
-
         set.blockNetworkImage = false
         set.loadsImagesAutomatically = true
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             set.safeBrowsingEnabled = true  // api 26
         }
         webTimeline.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-
-        // Set web view client
         webTimeline.webViewClient = object: WebViewClient(){
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
             }
-
             override fun onPageFinished(view: WebView, url: String) {
             }
         }
