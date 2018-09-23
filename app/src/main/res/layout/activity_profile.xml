@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,11 +14,11 @@
         android:minHeight="?attr/actionBarSize">
 
         <ImageView
-            android:id="@+id/account"
+            android:id="@+id/prevButton"
             android:layout_gravity="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_account_circle_black_24dp"
+            android:src="@drawable/ic_chevron_left_black_24dp"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/button_shadow"/>
@@ -37,36 +36,44 @@
             android:text="@string/app_name"
             android:fontFamily="@font/nanum_gothic_regular"/>
 
-        <ImageView
-            android:id="@+id/notification_click"
-            android:layout_gravity="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_notifications_none_black_24dp"
-            android:layout_marginEnd="25dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="@drawable/button_shadow"/>
-
     </Toolbar>
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#f2f2f2"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/navigation_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nameTextView"
+        android:src="@drawable/ic_face_black_24dp"
+        android:minHeight="200sp"
+        android:minWidth="200sp"/>
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        android:textSize="@dimen/dp_72"
+        app:layout_constraintBottom_toTopOf="@id/nickNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/profileImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/nanum_gothic_regular"
+        />
+
+    <TextView
+        android:id="@+id/nickNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_40"
+        android:text="null"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/menu_navigation" />
+        android:layout_marginBottom="90sp"
+        android:fontFamily="@font/nanum_gothic_regular"/>
+
 </android.support.constraint.ConstraintLayout>

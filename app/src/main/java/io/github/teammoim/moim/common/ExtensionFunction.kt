@@ -180,7 +180,7 @@ fun TextView.bold() {
 }
 
 /**
- * Extension method to set font for TextView.
+ * Extension method to set NanumGothic_Regular for TextView.
  */
 fun TextView.font(font: String) {
     typeface = Typeface.createFromAsset(context.assets, "fonts/$font.ttf")

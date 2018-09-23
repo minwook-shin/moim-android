@@ -14,6 +14,7 @@ import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.view.fragment.TimeLineFragment
 import io.github.teammoim.moim.view.fragment.ARFragment
 import io.github.teammoim.moim.view.fragment.SettingFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -47,12 +48,21 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         if (FirebaseManager.getUserEmail() == null){
-            startActivity(intentFor<IntroActivity>().clearTop())
+            startActivity(intentFor<IntroActivity>().clearTop().noHistory())
+            finish()
+        }
+
+        account.setOnClickListener {
+            startActivity<ProfileActivity>()
+        }
+
+        notification_click.setOnClickListener {
+            startActivity<NoticeActivity>()
         }
     }
 
     override fun onBackPressed() {
-        alert("정말로 종료하시겠습니까?", "확인") {
+        alert(getString(R.string.exit), getString(R.string.okay)) {
             yesButton {super.onBackPressed() }
         }.show()
     }

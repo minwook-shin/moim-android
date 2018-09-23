@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:layout_editor_absoluteY="81dp"
+    android:orientation="vertical"
+>
+
+    <io.github.teammoim.moim.view.custom.Logout
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shadow"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="@dimen/dp_10"/>
+
+    <io.github.teammoim.moim.view.custom.OpensourceNotice
+        android:id="@+id/ossButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shadow"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="@dimen/dp_10"
+        />
+
+    <io.github.teammoim.moim.view.custom.Clean
+        android:id="@+id/cleanButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shadow"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="@dimen/dp_10"/>
+</LinearLayout>

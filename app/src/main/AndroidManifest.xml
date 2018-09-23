@@ -3,6 +3,7 @@
     package="io.github.teammoim.moim">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -20,8 +21,10 @@
         <service android:name=".AppService" />
         <meta-data android:name="com.google.ar.core" android:value="required" />
         <activity android:name=".view.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"
-            android:clearTaskOnLaunch="true">
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +32,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.IntroActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"/>
+        <activity android:name=".view.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.NoticeActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel
 import com.blankj.utilcode.util.RegexUtils
 import com.blankj.utilcode.util.StringUtils
 import io.github.teammoim.moim.App
+import io.github.teammoim.moim.R
 import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.view.MainActivity
 import org.jetbrains.anko.*
@@ -19,10 +20,25 @@ class IntroViewModel() : ViewModel(), LifecycleObserver {
 
     fun signUp(email : String, password : String){
         FirebaseManager.getEmailSignUp(email,password).addOnCompleteListener{
-            App.INSTANCE.longToast("회원가입 성공")
-            App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())
+            if (it.isSuccessful) {
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_success))
+            App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
         }.addOnCanceledListener {
-            App.INSTANCE.longToast("회원가입 실패")
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_fail))
+        }.addOnFailureListener {
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_fail))
+        }
+    }
+
+    fun login(email : String, password : String){
+        FirebaseManager.getEmailLogIn(email,password).addOnCompleteListener {
+            if (it.isSuccessful) {
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_success))
+            App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
+        }.addOnCanceledListener {
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_fail))
+        }.addOnFailureListener {
+            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_fail))
         }
     }
 
