@@ -31,13 +31,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.IntroActivity"
+        <activity android:name=".view.SplashActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"/>
         <activity android:name=".view.ProfileActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.NoticeActivity" />
+        <activity android:name=".view.IntroActivity" />
     </application>
 
 </manifest>
