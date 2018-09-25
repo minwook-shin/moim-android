@@ -1,8 +1,8 @@
 package io.github.teammoim.moim.view.fragment
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle

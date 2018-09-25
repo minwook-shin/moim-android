@@ -1,9 +1,8 @@
 package io.github.teammoim.moim.viewModel
 
-import android.app.Application
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.blankj.utilcode.util.RegexUtils
 import com.blankj.utilcode.util.StringUtils
 import io.github.teammoim.moim.App
@@ -11,7 +10,6 @@ import io.github.teammoim.moim.R
 import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.view.MainActivity
 import org.jetbrains.anko.*
-import org.jetbrains.anko.design.snackbar
 
 class IntroViewModel() : ViewModel(), LifecycleObserver {
     fun checkEmail(v : String): Boolean = RegexUtils.isEmail(v)

@@ -1,13 +1,9 @@
 package io.github.teammoim.moim.view
 
-import android.Manifest
-import android.app.PendingIntent
-import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.MenuItem
 import android.view.View
-import com.fondesa.kpermissions.extension.permissionsBuilder
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.common.FirebaseManager

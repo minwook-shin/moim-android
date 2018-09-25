@@ -1,7 +1,7 @@
 package io.github.teammoim.moim.base
 
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity(){
