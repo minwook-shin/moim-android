@@ -23,7 +23,8 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome back"
+        android:text="What's your
+email address?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prevButton"
         app:layout_constraintBottom_toTopOf="@+id/emailBox"
@@ -38,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcomeText"
-        app:layout_constraintBottom_toTopOf="@+id/passwordBox"
+        app:layout_constraintBottom_toTopOf="@+id/emailContinueButton"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10"
         >
@@ -53,31 +54,12 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailBox"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/emailContinueButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="login"
+        android:text="Continue"
         android:backgroundTint="#ffffff"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +68,7 @@
         android:layout_marginTop="@dimen/dp_72"
         android:minWidth="125dp"
         android:minHeight="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:elevation="@dimen/dp_72"
@@ -101,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/loginButton">
+        app:layout_constraintTop_toTopOf="@+id/emailContinueButton">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/forgotText"
             android:layout_width="match_parent"
@@ -111,19 +93,12 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/dp_4"
             android:textSize="@dimen/dp_10"
+            android:visibility="gone"
             />
     </LinearLayout>
 
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

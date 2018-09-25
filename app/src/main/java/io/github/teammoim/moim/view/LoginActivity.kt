@@ -1,17 +1,17 @@
 package io.github.teammoim.moim.view
 
 import android.os.Bundle
-import com.blankj.utilcode.util.RegexUtils
-import com.blankj.utilcode.util.StringUtils
-import io.github.teammoim.moim.App
+import androidx.lifecycle.ViewModelProviders
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
-import io.github.teammoim.moim.common.FirebaseManager
+import io.github.teammoim.moim.viewModel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
 
 class LoginActivity: BaseActivity(){
+    private val viewModel by lazy { ViewModelProviders.of(this).get(LoginViewModel::class.java) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -21,28 +21,14 @@ class LoginActivity: BaseActivity(){
         }
 
         loginButton.setOnClickListener {
-            if (!checkEmail(emailText.text.toString())) {
+            if (!viewModel.checkEmail(emailText.text.toString())) {
                 loginButton.snackbar(getString(R.string.not_valid_email))
-            }else if (!checkPassword((passwordText.text.toString()))) {
+            }else if (!viewModel.checkPassword((passwordText.text.toString()))) {
                 loginButton.snackbar(getString(R.string.not_valid_password))
             }
             else{
-                login(emailText.text.toString(),passwordText.text.toString())
+                viewModel.login(emailText.text.toString(),passwordText.text.toString(),loading)
             }
         }
     }
-
-    private fun login(email : String, password : String){
-        FirebaseManager.getEmailLogIn(email,password).addOnCompleteListener {
-            if (it.isSuccessful) {
-                App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_success))
-                App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
-        }.addOnCanceledListener {
-            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_fail))
-        }.addOnFailureListener {
-            App.INSTANCE.longToast(App.INSTANCE.getString(R.string.login_fail))
-        }
-    }
-    private fun checkEmail(v : String): Boolean = RegexUtils.isEmail(v)
-    private fun checkPassword(v : String):Boolean = StringUtils.length(v) > 5
 }
