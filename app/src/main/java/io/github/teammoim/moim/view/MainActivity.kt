@@ -7,9 +7,7 @@ import android.view.View
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.common.FirebaseManager
-import io.github.teammoim.moim.view.fragment.TimeLineFragment
-import io.github.teammoim.moim.view.fragment.ARFragment
-import io.github.teammoim.moim.view.fragment.SettingFragment
+import io.github.teammoim.moim.view.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
 
@@ -27,6 +25,14 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             R.id.settingMenu -> {
                 val fragmentC = SettingFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragmentC).commit()
+            }
+            R.id.friendsMenu -> {
+                val fragmentD = FriendsFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragmentD).commit()
+            }
+            R.id.notificationMenu -> {
+                val fragmentF = NotificationFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragmentF).commit()
             }
 
         }
@@ -52,7 +58,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             startActivity<ProfileActivity>()
         }
 
-        notification_click.setOnClickListener {
+        search_click.setOnClickListener {
             startActivity<NoticeActivity>()
         }
     }

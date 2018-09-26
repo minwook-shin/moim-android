@@ -2,6 +2,8 @@ package io.github.teammoim.moim.view
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
+import com.blankj.utilcode.util.NetworkUtils
+import io.github.teammoim.moim.App
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.viewModel.LoginViewModel
@@ -16,6 +18,8 @@ class LoginActivity: BaseActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        isConnectNetwork()
+
         prevButton.setOnClickListener {
             startActivity(intentFor<SplashActivity>().clearTop().noHistory())
         }
@@ -29,6 +33,16 @@ class LoginActivity: BaseActivity(){
             else{
                 viewModel.login(emailText.text.toString(),passwordText.text.toString(),loading)
             }
+        }
+    }
+
+    private fun isConnectNetwork(){
+        if (!NetworkUtils.isConnected()){
+            alert("네트워크에 연결되지 않았습니다. 와이파이에 연결하시겠습니까?", App.INSTANCE.getString(R.string.okay)) {
+                yesButton {
+                    NetworkUtils.setWifiEnabled(true)
+                }
+            }.show()
         }
     }
 }

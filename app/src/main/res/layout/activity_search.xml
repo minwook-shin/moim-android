@@ -42,22 +42,11 @@
         android:id="@+id/recentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="최근 알림"
+        android:text="검색"
         android:textStyle="bold"
         android:textSize="@dimen/dp_72"
         android:fontFamily="@font/nanum_gothic_regular"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:layout_margin="@dimen/sp_16"/>
-
-    <TextView
-        android:id="@+id/allText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="모든 알림"
-        android:textStyle="bold"
-        android:textSize="@dimen/dp_72"
-        app:layout_constraintTop_toBottomOf="@id/recentText"
-        android:fontFamily="@font/nanum_gothic_regular"
         android:layout_margin="@dimen/sp_16"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
