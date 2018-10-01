@@ -59,7 +59,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         }
 
         search_click.setOnClickListener {
-            startActivity<NoticeActivity>()
+            startActivity<SearchActivity>()
         }
     }
 

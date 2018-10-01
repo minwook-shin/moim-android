@@ -40,7 +40,7 @@
             android:clearTaskOnLaunch="true"/>
         <activity android:name=".view.ProfileActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".view.NoticeActivity"
+        <activity android:name=".view.SearchActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.LoginActivity"
             android:windowSoftInputMode="adjustResize"
