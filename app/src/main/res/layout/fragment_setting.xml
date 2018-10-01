@@ -16,7 +16,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_shadow"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:elevation="4dp"
+        android:layout_margin="10dp"/>
 
     <io.github.teammoim.moim.view.custom.OpensourceNotice
         android:id="@+id/ossButton"
@@ -24,7 +26,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_shadow"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:elevation="4dp"
+        android:layout_margin="10dp"/>
 
     <io.github.teammoim.moim.view.custom.Clean
         android:id="@+id/cleanButton"
@@ -32,5 +36,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_shadow"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:elevation="4dp"
+        android:layout_margin="10dp"/>
 </LinearLayout>
