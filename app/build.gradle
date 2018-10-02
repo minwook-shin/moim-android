@@ -46,6 +46,8 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "com.mikepenz:aboutlibraries:6.2.0"
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.21'
+    implementation "com.google.android.gms:play-services-location:15.0.1"
+    implementation "org.osmdroid:osmdroid-android:6.0.2"
 }
 
 apply plugin: 'com.google.gms.google-services'
