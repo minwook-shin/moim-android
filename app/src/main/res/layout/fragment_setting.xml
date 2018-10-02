@@ -20,7 +20,7 @@
         android:elevation="4dp"
         android:layout_margin="10dp"/>
 
-    <io.github.teammoim.moim.view.custom.OpensourceNotice
+    <io.github.teammoim.moim.view.custom.OpenSourceNotice
         android:id="@+id/ossButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

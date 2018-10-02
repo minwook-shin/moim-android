@@ -12,7 +12,7 @@ import io.github.teammoim.moim.common.show
 import io.github.teammoim.moim.view.MainActivity
 import org.jetbrains.anko.*
 
-class SignUpViewModel() : ViewModel(), LifecycleObserver {
+class SignUpViewModel : ViewModel(), LifecycleObserver {
     fun checkEmail(v : String): Boolean = RegexUtils.isEmail(v)
     fun checkPassword(v : String):Boolean = StringUtils.length(v) > 5
 

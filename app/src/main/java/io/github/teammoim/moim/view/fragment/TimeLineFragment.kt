@@ -29,6 +29,10 @@ class TimeLineFragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
         connectViewModel()
         loadWebView()
+        fab.setOnClickListener {
+            val bottomSheetDialogFragment = TextWriterFragment()
+            bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -56,10 +60,7 @@ class TimeLineFragment : BaseFragment(){
     }
 
     private fun connectViewModel(){
-        viewModel.model.observe(this,Observer<Int> { printCount(it!!)})
+        viewModel.model.observe(this,Observer<Int> {})
         lifecycle.addObserver(viewModel)
-    }
-
-    private fun printCount(value: Int) {
     }
 }

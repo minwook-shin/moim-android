@@ -2,12 +2,8 @@ package io.github.teammoim.moim.view
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
-import com.blankj.utilcode.util.RegexUtils
-import com.blankj.utilcode.util.StringUtils
-import io.github.teammoim.moim.App
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
-import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.viewModel.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_signup_email.*
 import org.jetbrains.anko.*

@@ -2,10 +2,8 @@ package io.github.teammoim.moim.view
 
 import android.Manifest
 import android.os.Bundle
-import com.blankj.utilcode.util.NetworkUtils
 import com.fondesa.kpermissions.extension.listeners
 import com.fondesa.kpermissions.extension.permissionsBuilder
-import io.github.teammoim.moim.App
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -26,15 +24,15 @@ class SplashActivity:BaseActivity(){
         }
     }
 
-    private fun requestPermission(): Unit {
+    private fun requestPermission() {
         val request = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE).build()
         request.send()
         request.listeners {
-            onAccepted { permissions ->
+            onAccepted { _ ->
                 longToast(getString(R.string.all_permission_okay))
             }
 
-            onDenied { permissions ->
+            onDenied { _ ->
                 longToast(getString(R.string.all_permission_deny))
                 val reRequest = permissionsBuilder(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE).build()
                 reRequest.send()
@@ -46,7 +44,7 @@ class SplashActivity:BaseActivity(){
                 reRequest.send()
             }
 
-            onShouldShowRationale { permissions, nonce ->
+            onShouldShowRationale { _, _ ->
             }
         }
     }
