@@ -30,17 +30,7 @@ class ARFragment : BaseFragment(){
         map.setTileSource(TileSourceFactory.MAPNIK)
         setupMapView()
 
-        val overlayItemArrayList : ArrayList<OverlayItem> = ArrayList()
-
-
-        val geoPoint = GeoPoint(37.6096409, 126.99769700000002)
-        val overlayItem = OverlayItem("국민대학교", "종강 이벤트", geoPoint)
-        val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
-        overlayItem.setMarker(markerDrawable)
-
-        overlayItemArrayList.add(overlayItem)
-
-        val locationOverlay = ItemizedIconOverlay(overlayItemArrayList, object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
+        val locationOverlay = ItemizedIconOverlay(addPoint(), object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
             override fun onItemSingleTapUp(i: Int, overlayItem: OverlayItem): Boolean {
                 App.INSTANCE.longToast(overlayItem.title + " " + overlayItem.snippet)
                 val bottomSheetDialogFragment = EventInfomationFragment()
@@ -55,6 +45,24 @@ class ARFragment : BaseFragment(){
 
         this.map.overlays.add(locationOverlay)
         map.overlays.add(locationOverlay)
+    }
+
+    private fun addPoint(): ArrayList<OverlayItem> {
+        val overlayItemArrayList : ArrayList<OverlayItem> = ArrayList()
+
+        val geoPoint = GeoPoint(37.6096409, 126.99769700000002)
+        val overlayItem = OverlayItem("국민대학교1", "종강 이벤트", geoPoint)
+        val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
+        overlayItem.setMarker(markerDrawable)
+
+        val geoPoint2 = GeoPoint(37.610155, 126.997041)
+        val markerDrawable2 = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
+        val overlayItem2 = OverlayItem("국민대학교2", "개강 이벤트", geoPoint2)
+        overlayItem2.setMarker(markerDrawable2)
+
+        overlayItemArrayList.add(overlayItem)
+        overlayItemArrayList.add(overlayItem2)
+        return overlayItemArrayList
     }
 
     private fun setupMapView() {
