@@ -1,23 +1,35 @@
 package io.github.teammoim.moim.view
 
-import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.view.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
+import io.nlopez.smartlocation.location.providers.LocationGooglePlayServicesProvider
+import com.google.android.gms.location.DetectedActivity
+import io.nlopez.smartlocation.*
+import io.nlopez.smartlocation.geofencing.utils.TransitionGeofence
+import io.nlopez.smartlocation.SmartLocation
 
-class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnLocationUpdatedListener, OnActivityUpdatedListener, OnGeofencingTransitionListener {
+    override fun onLocationUpdated(p0: Location?) {
+        if (p0 != null) {
+            toast("update : "+p0.latitude.toString() + " " + p0.longitude.toString())
+        }
+    }
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    override fun onActivityUpdated(p0: DetectedActivity?) {
+    }
+
+    override fun onGeofenceTransition(p0: TransitionGeofence?) {
+    }
+
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId){
@@ -46,6 +58,17 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         return true
     }
 
+    override fun onStop() {
+        super.onStop()
+        stopLocation()
+    }
+
+    private fun stopLocation() {
+        SmartLocation.with(this).location().stop()
+        SmartLocation.with(this).activity().stop()
+        SmartLocation.with(this).geofencing().stop()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,25 +92,27 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             startActivity<SearchActivity>()
         }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        getLastLocation()
+        startLocation()
     }
 
     override fun onBackPressed() {
         alert(getString(R.string.exit), getString(R.string.okay)) {
-            yesButton {super.onBackPressed() }
+            yesButton { super.onBackPressed() }
         }.show()
     }
 
-    @SuppressLint("MissingPermission")
-    private fun getLastLocation() {
-        fusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-            if (task.isSuccessful && task.result != null) {
-                longToast(task.result.latitude.toString() + "   "+  task.result.longitude.toString() )
-            } else {
-            }
+    private fun startLocation() {
+        val provider :LocationGooglePlayServicesProvider? = LocationGooglePlayServicesProvider()
+        provider?.setCheckLocationSettings(true)
+        val smartLocation = SmartLocation.Builder(this).logging(true).build()
+        smartLocation.location(provider).start(this)
+        smartLocation.activity().start(this)
+        val lastLocation = SmartLocation.with(this).location().lastLocation
+        if (lastLocation != null) {
+            toast(lastLocation.latitude.toString()+" "+lastLocation.longitude.toString())
         }
     }
+
 }
 
 
