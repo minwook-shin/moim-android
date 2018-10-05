@@ -25,7 +25,6 @@ class NotificationRecyclerViewAdapter(val context: Context, val dataSet: ArrayLi
 
     override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
         val holder: ViewHolder = p0 as ViewHolder
-
         if (0 <= p1 && p1 < mDataSet.size) {
             val data = mDataSet[p1]
             holder.bind(data)
@@ -41,5 +40,4 @@ class NotificationRecyclerViewAdapter(val context: Context, val dataSet: ArrayLi
             itemView.notification_list_text.text = data
         }
     }
-
 }

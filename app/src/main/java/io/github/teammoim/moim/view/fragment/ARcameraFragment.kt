@@ -19,10 +19,6 @@ import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.math.Vector3
 
 
-
-
-
-
 class ARcameraFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_ar_camera, container, false)
@@ -56,7 +52,7 @@ class ARcameraFragment : BaseFragment() {
             andy.renderable = andyRenderable
             andy.select()
             val widget = TransformableNode(arFragment?.transformationSystem)
-            widget.setParent(anchorNode)
+            widget.setParent(andy)
             widget.renderable = testViewRenderable
             widget.localPosition = Vector3(0.0f, 0.25f, 0.0f)
             widget.select()
