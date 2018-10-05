@@ -29,10 +29,15 @@ import android.os.Build
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.google.ar.core.Session
+import com.google.ar.core.exceptions.*
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnLocationUpdatedListener, OnActivityUpdatedListener, OnGeofencingTransitionListener {
     private val MIN_OPENGL_VERSION = 3.0
+    private var installRequested: Boolean = false
+    private var session: Session? = null
+
     override fun onLocationUpdated(p0: Location?) {
         if (p0 != null) {
             toast("update : " + p0.latitude.toString() + " " + p0.longitude.toString())
@@ -89,6 +94,58 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         SmartLocation.with(this).geofencing().stop()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (session == null) {
+            var exception: Exception? = null
+            var message: String? = null
+            try {
+                when (ArCoreApk.getInstance()?.requestInstall(this, !installRequested)) {
+                    ArCoreApk.InstallStatus.INSTALL_REQUESTED -> {
+                        installRequested = true
+                        return
+                    }
+                    ArCoreApk.InstallStatus.INSTALLED -> {
+                    }
+                }
+
+                session = Session(this)
+
+            } catch (e: UnavailableArcoreNotInstalledException) {
+                message = "Please install ARCore"
+                exception = e
+            } catch (e: UnavailableUserDeclinedInstallationException) {
+                message = "Please install ARCore"
+                exception = e
+            } catch (e: UnavailableApkTooOldException) {
+                message = "Please update ARCore"
+                exception = e
+            } catch (e: UnavailableSdkTooOldException) {
+                message = "Please update this app"
+                exception = e
+            } catch (e: UnavailableDeviceNotCompatibleException) {
+                message = "This device does not support AR"
+                exception = e
+            } catch (e: Exception) {
+                message = "Failed to create AR session"
+                exception = e
+            }
+
+            if (message != null) {
+                Log.e(TAG, "Exception creating session", exception)
+                return
+            }
+        }
+
+        try {
+            session!!.resume()
+        } catch (e: CameraNotAvailableException) {
+            session = null
+            return
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -122,11 +179,6 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         startLocation()
     }
 
-    override fun onBackPressed() {
-        alert(getString(R.string.exit), getString(R.string.okay)) {
-            yesButton { super.onBackPressed() }
-        }.show()
-    }
 
     private fun checkIsSupportedDevice() {
         val openGlVersionString = (this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
