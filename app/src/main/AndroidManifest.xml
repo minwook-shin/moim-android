@@ -25,7 +25,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:resizeableActivity="false"
         tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.ar.core"
@@ -36,7 +35,8 @@
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

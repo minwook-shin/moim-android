@@ -11,7 +11,7 @@ open class BaseActivity : AppCompatActivity(){
 
     override fun setContentView(view: View?) {
         super.setContentView(view)
-        this?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        this?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+        this.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        this.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
     }
 }
