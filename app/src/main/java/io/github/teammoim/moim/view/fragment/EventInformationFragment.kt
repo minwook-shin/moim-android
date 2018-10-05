@@ -6,7 +6,7 @@ import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.github.teammoim.moim.R
 
-class EventInfomationFragment: BottomSheetDialogFragment(){
+class EventInformationFragment: BottomSheetDialogFragment(){
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog?, style: Int) {
         super.setupDialog(dialog, style)

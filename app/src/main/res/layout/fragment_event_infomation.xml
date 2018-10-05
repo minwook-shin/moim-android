@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_10">
+
+    <TextView
+        android:id="@+id/eventName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/dp_40"
+        android:text="Event name"/>
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_10"
+        android:text="Date"/>
+
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dp_40"
+
+        android:text="Description"/>
+
+    <Button
+        android:id="@+id/joinRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="참석 요청하기"/>
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/chatBox"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

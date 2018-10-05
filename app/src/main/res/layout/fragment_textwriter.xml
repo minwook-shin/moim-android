@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/chatBox"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.9"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -18,4 +19,12 @@
             android:singleLine="true"
             android:fontFamily="@font/nanum_gothic_regular"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_weight="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="전송"/>
 </LinearLayout>

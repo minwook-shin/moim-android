@@ -33,7 +33,7 @@ class ARFragment : BaseFragment(){
         val locationOverlay = ItemizedIconOverlay(addPoint(), object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
             override fun onItemSingleTapUp(i: Int, overlayItem: OverlayItem): Boolean {
                 App.INSTANCE.longToast(overlayItem.title + " " + overlayItem.snippet)
-                val bottomSheetDialogFragment = EventInfomationFragment()
+                val bottomSheetDialogFragment = EventInformationFragment()
                 bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
                 return true
             }
