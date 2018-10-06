@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <meta-data android:name="android.max_aspect" android:value="1.78"/>
+
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
@@ -25,7 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        >
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />
@@ -36,8 +39,8 @@
             android:launchMode="singleTask"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="portrait"
-            android:exported="true">
-
+            android:exported="true"
+            android:resizeableActivity="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

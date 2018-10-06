@@ -17,18 +17,11 @@ import com.google.android.gms.location.DetectedActivity
 import io.nlopez.smartlocation.*
 import io.nlopez.smartlocation.geofencing.utils.TransitionGeofence
 import io.nlopez.smartlocation.SmartLocation
-import androidx.core.os.HandlerCompat.postDelayed
 import com.google.ar.core.ArCoreApk
-import android.widget.Toast
-import com.google.a.b.a.a.a.e
-import android.content.Context.ACTIVITY_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
 import android.app.ActivityManager
-import android.os.Build.VERSION_CODES
-import android.os.Build
-import android.app.Activity
 import android.content.Context
 import android.util.Log
+import android.view.WindowManager
 import com.google.ar.core.Session
 import com.google.ar.core.exceptions.*
 
@@ -92,6 +85,17 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         SmartLocation.with(this).location().stop()
         SmartLocation.with(this).activity().stop()
         SmartLocation.with(this).geofencing().stop()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) showSystemUI()
+    }
+
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
     }
 
     override fun onResume() {
@@ -186,8 +190,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
                 .glEsVersion
         if (openGlVersionString.toDouble() < MIN_OPENGL_VERSION) {
             longToast("Sceneform requires OpenGL ES 3.0 later")
-        }
-        else{
+        } else {
             val cameraFragment = ARcameraFragment()
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, cameraFragment).commit()
         }

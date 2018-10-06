@@ -3,6 +3,7 @@ package io.github.teammoim.moim.view
 import android.os.Bundle
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
+import io.github.teammoim.moim.common.FirebaseManager
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity:BaseActivity(){
@@ -14,5 +15,7 @@ class ProfileActivity:BaseActivity(){
         prevButton.setOnClickListener {
             this.onBackPressed()
         }
+
+        nameTextView.text = FirebaseManager.getUserEmail()
     }
 }
