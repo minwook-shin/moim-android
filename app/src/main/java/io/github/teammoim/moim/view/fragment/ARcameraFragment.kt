@@ -1,5 +1,6 @@
 package io.github.teammoim.moim.view.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import io.github.teammoim.moim.R
@@ -15,6 +16,7 @@ import io.github.teammoim.moim.App
 import org.jetbrains.anko.toast
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.math.Vector3
+import com.google.ar.sceneform.assets.RenderableSource
 
 
 class ARcameraFragment : BaseFragment() {
@@ -23,6 +25,10 @@ class ARcameraFragment : BaseFragment() {
     }
     private var arFragment: ArFragment? = null
     private lateinit var andyRenderable: ModelRenderable
+
+    private val GLTF_ASSET = "https://github.com/teammoim/ar-modeling/raw/master/Marker.gltf"
+
+
     private lateinit var testViewRenderable: ViewRenderable
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.viewTreeObserver.addOnWindowFocusChangeListener {
@@ -44,6 +50,15 @@ class ARcameraFragment : BaseFragment() {
                     null
                 }
 
+        ModelRenderable.builder()
+                .setSource(this.activity, RenderableSource.builder().setSource(
+                        this.activity,
+                        Uri.parse(GLTF_ASSET),
+                        RenderableSource.SourceType.GLTF2).build())
+                .setRegistryId(GLTF_ASSET)
+                .build()
+                .thenAccept { renderable -> andyRenderable = renderable }
+
         ViewRenderable.builder()
                 .setView(this.activity, R.layout.widget_ar)
                 .build()
@@ -55,6 +70,9 @@ class ARcameraFragment : BaseFragment() {
                         bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
                     }
                 }
+
+
+
 
         arFragment?.setOnTapArPlaneListener { hitResult: HitResult, plane: Plane, motionEvent: MotionEvent ->
             val anchor = hitResult.createAnchor()

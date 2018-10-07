@@ -55,7 +55,7 @@ dependencies {
     implementation 'io.nlopez.smartlocation:library:3.3.3'
     implementation 'com.google.ar:core:1.5.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.5.0'
-
+    implementation 'com.google.ar.sceneform:assets:1.5.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
