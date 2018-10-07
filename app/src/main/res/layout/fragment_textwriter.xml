@@ -11,7 +11,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/chatText"
+            android:id="@+id/chatEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="타임라인에 글을 올리기."

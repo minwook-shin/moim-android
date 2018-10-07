@@ -37,8 +37,8 @@ class NotificationFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListene
     private fun addItem() {
         notificationList.clear()
         notification_list.invalidate();
-        notificationList.add("회웡가입을 환영합니다.")
-        notificationList.add("당신에게 어울리는 새로운 이벤트가 등록되었습니다.")
+        notificationList.add("회원가입을 환영합니다.")
+        notificationList.add("근처에 당신에게 어울리는 새로운 이벤트가 등록되었습니다.")
         notification_list.adapter?.notifyDataSetChanged()
         swipe.isRefreshing = false
 

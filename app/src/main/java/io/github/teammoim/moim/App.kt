@@ -14,6 +14,7 @@ class App : Application(){
         prefs = AppSharedPreferences(applicationContext)
         super.onCreate()
     }
+    val timelineArray = ArrayList<TimelineModel>()
 
     companion object {
         lateinit var INSTANCE: App
