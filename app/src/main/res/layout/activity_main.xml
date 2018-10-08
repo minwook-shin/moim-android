@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -38,12 +38,12 @@
             android:fontFamily="@font/nanum_gothic_regular"/>
 
         <ImageView
-            android:id="@+id/notification_click"
+            android:id="@+id/search_click"
             android:layout_gravity="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_notifications_none_black_24dp"
-            android:layout_marginEnd="25dp"
+            android:src="@drawable/ic_search_black_24dp"
+            android:layout_marginEnd="20dp"
             android:clickable="true"
             android:focusable="true"
             android:background="@drawable/button_shadow"/>
@@ -61,7 +61,21 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/camera_fab"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:elevation="@dimen/dp_10"
+        android:src="@drawable/ic_camera_black_24dp"
+        app:layout_constraintBottom_toTopOf="@id/navigation_view"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,4 +83,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/menu_navigation" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

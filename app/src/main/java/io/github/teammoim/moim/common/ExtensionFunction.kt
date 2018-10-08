@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package io.github.teammoim.moim.common
 
 /**
@@ -33,7 +35,7 @@ import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Typeface
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -137,13 +139,13 @@ fun Context.share(text: String, subject: String = ""): Boolean {
 /**
  * Extension method to share text for Fragment.
  */
-fun Fragment.share(text: String, subject: String = "") = activity!!.share(text, subject)
+fun androidx.fragment.app.Fragment.share(text: String, subject: String = "") = activity!!.share(text, subject)
 
 
 /**
  * Extension method to provide hide keyboard for [Fragment].
  */
-fun Fragment.hideSoftKeyboard() {
+fun androidx.fragment.app.Fragment.hideSoftKeyboard() {
     activity?.hideSoftKeyboard()
 }
 
