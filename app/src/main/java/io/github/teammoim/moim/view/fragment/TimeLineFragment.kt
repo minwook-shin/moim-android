@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.github.teammoim.moim.App
@@ -23,9 +24,8 @@ import android.widget.EditText
 import com.blankj.utilcode.util.SnackbarUtils.dismiss
 import android.widget.ImageButton
 import com.google.android.material.bottomsheet.BottomSheetDialog
-
-
-
+import io.github.teammoim.moim.common.remove
+import io.github.teammoim.moim.view.custom.NoResult
 
 
 class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -62,12 +62,26 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         timelineList = App.INSTANCE.timelineArray
         timeline_list.adapter?.notifyDataSetChanged()
         swipe.isRefreshing = false
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        view.viewTreeObserver.addOnWindowFocusChangeListener {
+            if (!App.INSTANCE.timelineArray.isEmpty()){
+                noResult.remove()
+            }
+        }
+
+        if (App.INSTANCE.timelineArray.isEmpty()){
+            noResult.addView(NoResult(this.activity!!.applicationContext))
+        }
+        else{
+            noResult.remove()
+        }
         super.onViewCreated(view, savedInstanceState)
         connectViewModel()
+
         fab.setOnClickListener {
             val bottomSheetDialogFragment = TextWriterFragment()
             bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
