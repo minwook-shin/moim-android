@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,6 +42,13 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         addItem()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!App.INSTANCE.timelineArray.isEmpty()){
+            noResult.remove()
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -67,12 +75,6 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.viewTreeObserver.addOnWindowFocusChangeListener {
-            if (!App.INSTANCE.timelineArray.isEmpty()){
-                noResult.remove()
-            }
-        }
-
         if (App.INSTANCE.timelineArray.isEmpty()){
             noResult.addView(NoResult(this.activity!!.applicationContext))
         }

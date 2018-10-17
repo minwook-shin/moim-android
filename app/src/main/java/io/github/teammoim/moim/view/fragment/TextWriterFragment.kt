@@ -31,8 +31,11 @@ class TextWriterFragment: BottomSheetDialogFragment(),View.OnClickListener{
         dialog?.setContentView(contentView)
         val button = contentView.findViewById(R.id.sendButton) as Button
         button.setOnClickListener {
-            App.INSTANCE.timelineArray.add(TimelineModel(FirebaseManager.getUserEmail()!!,"",contentView.chatEditText.text.toString()))
-            this.dismiss()
+            if (contentView.chatEditText.text.toString() != ""){
+                App.INSTANCE.timelineArray.add(TimelineModel(FirebaseManager.getUserEmail()!!,"",contentView.chatEditText.text.toString()))
+                this.dismiss()
+            }
+
         }
     }
 }
