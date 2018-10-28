@@ -9,23 +9,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30dp"
-        android:text="C++ 배틀쉽 과제 코딩 정모"/>
+        android:textSize="@dimen/dp_40"
+        android:text="Event name"/>
 
     <TextView
         android:id="@+id/Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="2018년 10월 17일"/>
+        android:textSize="@dimen/dp_10"
+        android:text="Date"/>
 
     <TextView
         android:id="@+id/Description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="@dimen/dp_40"
 
-        android:text="C++ 배틀쉽하다가 익사 하시고 계신분들 같이 코딩해요"/>
+        android:text="Description"/>
 
     <Button
         android:id="@+id/joinRequest"

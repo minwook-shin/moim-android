@@ -32,7 +32,7 @@ class ARFragment : BaseFragment(){
 
         val locationOverlay = ItemizedIconOverlay(addPoint(), object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
             override fun onItemSingleTapUp(i: Int, overlayItem: OverlayItem): Boolean {
-//                App.INSTANCE.longToast(overlayItem.title + " " + overlayItem.snippet)
+                App.INSTANCE.longToast(overlayItem.title + " " + overlayItem.snippet)
                 val bottomSheetDialogFragment = EventInformationFragment()
                 bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
                 return true
@@ -51,11 +51,17 @@ class ARFragment : BaseFragment(){
         val overlayItemArrayList : ArrayList<OverlayItem> = ArrayList()
 
         val geoPoint = GeoPoint(37.6096409, 126.99769700000002)
-        val overlayItem = OverlayItem("이벤트 이름", "이벤트 설명", geoPoint)
+        val overlayItem = OverlayItem("국민대학교1", "종강 이벤트", geoPoint)
         val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
         overlayItem.setMarker(markerDrawable)
 
+        val geoPoint2 = GeoPoint(37.610155, 126.997041)
+        val markerDrawable2 = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
+        val overlayItem2 = OverlayItem("국민대학교2", "개강 이벤트", geoPoint2)
+        overlayItem2.setMarker(markerDrawable2)
+
         overlayItemArrayList.add(overlayItem)
+        overlayItemArrayList.add(overlayItem2)
         return overlayItemArrayList
     }
 
