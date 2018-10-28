@@ -3,6 +3,7 @@ package io.github.teammoim.moim
 import android.app.Application
 import android.content.Intent
 import io.github.teammoim.moim.common.AppSharedPreferences
+import io.github.teammoim.moim.common.FirebaseManager
 
 class App : Application(){
     init {
@@ -14,6 +15,8 @@ class App : Application(){
         prefs = AppSharedPreferences(applicationContext)
         super.onCreate()
     }
+
+    var myInfo = myInformationModel("","")
     val timelineArray = ArrayList<TimelineModel>()
 
     companion object {

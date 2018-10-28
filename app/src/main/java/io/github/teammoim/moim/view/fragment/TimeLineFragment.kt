@@ -43,7 +43,6 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         swipe.setOnRefreshListener(this)
 
         addItem()

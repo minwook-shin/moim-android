@@ -76,8 +76,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         return true
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         stopLocation()
     }
 
@@ -152,6 +152,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
         val fragmentA = TimeLineFragment()
@@ -166,6 +167,9 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if (FirebaseManager.getUserEmail() == null) {
             startActivity(intentFor<SplashActivity>().clearTop().noHistory())
             finish()
+        }
+        else{
+            FirebaseManager.uploadMyInformation()
         }
 
         account.setOnClickListener {
