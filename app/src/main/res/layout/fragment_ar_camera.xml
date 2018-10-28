@@ -3,9 +3,8 @@
 android:orientation="vertical" android:layout_width="match_parent"
 android:layout_height="match_parent">
 
-    <com.google.ar.sceneform.ArSceneView
+    <fragment android:name="com.google.ar.sceneform.ux.ArFragment"
         android:id="@+id/ux_fragment"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="top"/>
+        android:layout_height="fill_parent" />
 </LinearLayout>
