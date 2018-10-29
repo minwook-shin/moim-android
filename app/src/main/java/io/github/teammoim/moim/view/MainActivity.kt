@@ -24,6 +24,9 @@ import android.util.Log
 import android.view.WindowManager
 import com.google.ar.core.Session
 import com.google.ar.core.exceptions.*
+import android.content.Intent
+
+
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnLocationUpdatedListener, OnActivityUpdatedListener, OnGeofencingTransitionListener {
@@ -154,6 +157,14 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        if (getIntent() != null) {
+            val uri = getIntent().data
+            if (uri != null) {
+                val param1: String? = uri.getQueryParameter("param1")
+                longToast(param1.toString())
+            }
+        }
 
         val fragmentA = TimeLineFragment()
         supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragmentA).commit()
