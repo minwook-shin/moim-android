@@ -158,8 +158,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         setContentView(R.layout.activity_main)
 
-        if (getIntent() != null) {
-            val uri = getIntent().data
+        if (intent != null) {
+            val uri = intent.data
             if (uri != null) {
                 val param1: String? = uri.getQueryParameter("param1")
                 longToast(param1.toString())

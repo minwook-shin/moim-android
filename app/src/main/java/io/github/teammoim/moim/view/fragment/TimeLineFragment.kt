@@ -66,12 +66,6 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.viewTreeObserver.addOnWindowFocusChangeListener {
-            if (!App.INSTANCE.timelineArray.isEmpty()){
-                noResult.remove()
-            }
-        }
-
         if (App.INSTANCE.timelineArray.isEmpty()){
             noResult.addView(NoResult(this.activity!!.applicationContext))
         }
