@@ -16,6 +16,8 @@ import io.github.teammoim.moim.common.FirebaseManager
 import kotlinx.android.synthetic.main.fragment_textwriter.*
 import kotlinx.android.synthetic.main.fragment_textwriter.view.*
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class TextWriterFragment: BottomSheetDialogFragment(),View.OnClickListener{
@@ -24,14 +26,19 @@ class TextWriterFragment: BottomSheetDialogFragment(),View.OnClickListener{
 
     }
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi", "SimpleDateFormat")
     override fun setupDialog(dialog: Dialog?, style: Int) {
         super.setupDialog(dialog, style)
         val contentView = View.inflate(context, R.layout.fragment_textwriter, null)
         dialog?.setContentView(contentView)
         val button = contentView.findViewById(R.id.sendButton) as Button
         button.setOnClickListener {
+            val cal = Calendar.getInstance()
+//            val sdf = SimpleDateFormat("HH:mm:ss")
+
             App.INSTANCE.timelineArray.add(TimelineModel(FirebaseManager.getUserEmail()!!,"",contentView.chatEditText.text.toString()))
+            FirebaseManager.getRef("timeline")?.child(cal.timeInMillis.toString())?.child("name")?.setValue(FirebaseManager.getUserEmail())
+            FirebaseManager.getRef("timeline")?.child(cal.timeInMillis.toString())?.child("text")?.setValue(contentView.chatEditText.text.toString())
             this.dismiss()
         }
     }

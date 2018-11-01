@@ -1,6 +1,7 @@
 package io.github.teammoim.moim.view
 
 import android.os.Bundle
+import io.github.teammoim.moim.App
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.common.FirebaseManager
@@ -16,6 +17,6 @@ class ProfileActivity:BaseActivity(){
             this.onBackPressed()
         }
 
-        nameTextView.text = FirebaseManager.getUserEmail()
+        nameTextView.text = App.INSTANCE.myInfo.Email
     }
 }

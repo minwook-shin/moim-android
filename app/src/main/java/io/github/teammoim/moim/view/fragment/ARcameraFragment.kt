@@ -8,8 +8,7 @@ import io.github.teammoim.moim.base.BaseFragment
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.TransformableNode
 import android.widget.Button
-import com.google.ar.core.HitResult
-import com.google.ar.core.Plane
+import com.google.ar.core.*
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.ux.ArFragment
 import io.github.teammoim.moim.App
@@ -23,8 +22,10 @@ class ARcameraFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_ar_camera, container, false)
     }
+
     private var arFragment: ArFragment? = null
     private lateinit var andyRenderable: ModelRenderable
+
 
     private val GLTF_ASSET = "https://github.com/teammoim/ar-modeling/raw/master/Marker.gltf"
 
@@ -32,15 +33,14 @@ class ARcameraFragment : BaseFragment() {
     private lateinit var testViewRenderable: ViewRenderable
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.viewTreeObserver.addOnWindowFocusChangeListener {
-            activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+            activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
             activity?.window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
 
         }
-
-
         super.onViewCreated(view, savedInstanceState)
         setupView()
+
         ModelRenderable.builder()
                 .setSource(this.activity, R.raw.andy)
                 .build()
@@ -64,7 +64,7 @@ class ARcameraFragment : BaseFragment() {
                 .build()
                 .thenAccept { renderable ->
                     testViewRenderable = renderable
-                    val button : Button = testViewRenderable.view.findViewById(R.id.informationButton) as Button
+                    val button: Button = testViewRenderable.view.findViewById(R.id.informationButton) as Button
                     button.setOnClickListener {
                         val bottomSheetDialogFragment = EventInformationFragment()
                         bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
@@ -74,7 +74,7 @@ class ARcameraFragment : BaseFragment() {
 
 
 
-        arFragment?.setOnTapArPlaneListener { hitResult: HitResult, plane: Plane, motionEvent: MotionEvent ->
+        arFragment?.setOnTapArPlaneListener { hitResult: HitResult, _: Plane, _: MotionEvent ->
             val anchor = hitResult.createAnchor()
             val anchorNode = AnchorNode(anchor)
             anchorNode.setParent(arFragment?.arSceneView?.scene)
@@ -95,6 +95,4 @@ class ARcameraFragment : BaseFragment() {
         arFragment = childFragmentManager.findFragmentById(R.id.ux_fragment) as? ArFragment
 
     }
-
-
 }

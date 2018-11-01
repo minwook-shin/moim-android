@@ -11,7 +11,7 @@ object FirebaseManager{
     private val database by lazy { FirebaseDatabase.getInstance() }
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    fun getRef(ref: String): DatabaseReference = database.getReference(ref)
+    fun getRef(ref: String?): DatabaseReference? = ref?.let { database.getReference(it) }
 
     fun getAuth(): FirebaseAuth = mAuth
 
@@ -29,6 +29,12 @@ object FirebaseManager{
 
     fun getEmailLogIn(email: String, password: String): Task<AuthResult> {
         return mAuth.signInWithEmailAndPassword(email, password)
+    }
+
+    fun uploadMyInformation(){
+        getRef(getUserUid())?.child("uid")?.setValue(getUserUid())
+        getRef(getUserUid())?.child("email")?.setValue(getUserEmail())
+        getRef(getUserUid())?.child("name")?.setValue("")
     }
 
 }

@@ -24,6 +24,9 @@ import android.util.Log
 import android.view.WindowManager
 import com.google.ar.core.Session
 import com.google.ar.core.exceptions.*
+import android.content.Intent
+
+
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnLocationUpdatedListener, OnActivityUpdatedListener, OnGeofencingTransitionListener {
@@ -76,8 +79,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         return true
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         stopLocation()
     }
 
@@ -152,7 +155,16 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
+        if (intent != null) {
+            val uri = intent.data
+            if (uri != null) {
+                val param1: String? = uri.getQueryParameter("param1")
+                longToast(param1.toString())
+            }
+        }
 
         val fragmentA = TimeLineFragment()
         supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragmentA).commit()
@@ -166,6 +178,9 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if (FirebaseManager.getUserEmail() == null) {
             startActivity(intentFor<SplashActivity>().clearTop().noHistory())
             finish()
+        }
+        else{
+            FirebaseManager.uploadMyInformation()
         }
 
         account.setOnClickListener {
