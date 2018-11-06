@@ -1,6 +1,6 @@
 package io.github.teammoim.moim
 
-data class myInformationModel(
+data class MyInformationModel(
         var uid: String?,
         var Email: String
 )
