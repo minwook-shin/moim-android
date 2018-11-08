@@ -25,24 +25,49 @@ class AppService : Service() {
         FirebaseManager.getRef(FirebaseManager.getUserUid())?.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 if (p0.key.equals("email"))
                     App.INSTANCE.myInfo.Email = p0.value.toString()
 
+                if(p0.key.equals("friend")){
+                    for(snapshot in p0.children){
+                        App.INSTANCE.myFriend.add(snapshot.value.toString())
+                    }
+                }
 
             }
+
             override fun onChildRemoved(p0: DataSnapshot) {
             }
+
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-//                for (snapshot in p0.children) {
-//                    if (snapshot.key == "email") {
-//                        App.INSTANCE.myInfo.Email = snapshot.value.toString()
-//                    }
-//                }
-                App.INSTANCE.myInfo.Email = p0.value.toString()
+                if (p0.key.equals("email"))
+                    App.INSTANCE.myInfo.Email = p0.value.toString()
+            }
+
+        })
+
+        FirebaseManager.getRef("userList")?.addChildEventListener(object:ChildEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                App.INSTANCE.allUser.add(p0.value.toString())
+            }
+
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                App.INSTANCE.allUser.add(p0.value.toString())
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
             }
 
         })

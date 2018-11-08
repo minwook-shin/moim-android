@@ -17,6 +17,8 @@ class App : Application(){
 
     var myInfo = MyInformationModel("","")
     val timelineArray = ArrayList<TimelineModel>()
+    val allUser = ArrayList<String>()
+    val myFriend = ArrayList<String>()
 
     companion object {
         lateinit var INSTANCE: App

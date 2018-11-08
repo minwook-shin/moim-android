@@ -35,6 +35,7 @@ object FirebaseManager{
         getRef(getUserUid())?.child("uid")?.setValue(getUserUid())
         getRef(getUserUid())?.child("email")?.setValue(getUserEmail())
         getRef(getUserUid())?.child("name")?.setValue("")
+        getRef("userList")?.child(getUserUid()!!)?.setValue(getUserEmail())
     }
 
 }
