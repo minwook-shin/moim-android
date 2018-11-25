@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import io.github.teammoim.moim.App
+import io.github.teammoim.moim.App.Companion.INSTANCE
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.adapter.FriendsRecyclerViewAdapter
 import io.github.teammoim.moim.base.BaseFragment
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_friends.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.selector
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FriendsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -29,7 +31,7 @@ class FriendsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
         App.INSTANCE.myFriend.clear()
         friendsList.clear()
-        FirebaseManager.getRef(FirebaseManager.getUserUid())?.child("friend")?.addListenerForSingleValueEvent(object : ValueEventListener {
+        FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("subscribe")?.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
@@ -47,6 +49,9 @@ class FriendsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val userList = ArrayList<String>()
+        userList.clear()
+        val reversed = App.INSTANCE.allUser.entries.associate{(k,v)-> v to k}
 
         swipe.setOnRefreshListener(this)
         App.INSTANCE.myFriend.add("none")
@@ -57,17 +62,20 @@ class FriendsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         friends_list.setHasFixedSize(true)
 
         fab.setOnClickListener {
-            val userList = App.INSTANCE.allUser
-            activity!!.selector("누구를 친구로 추가하시겠습니까?", userList) { _, i ->
+            userList.clear()
+            for ((i,j) in App.INSTANCE.allUser){
+                userList.add(j)
+            }
+            activity!!.selector("누구를 구독하시겠습니까?", userList) { _, i ->
                 if (userList[i] == FirebaseManager.getUserEmail()) {
-                    fab.snackbar("자기 자신을 친구로 추가할 수 없습니다.")
+                    fab.snackbar("자기 자신을 구독 추가할 수 없습니다.")
                 } else {
                     val cal = Calendar.getInstance()
                     if (App.INSTANCE.myFriend.contains(userList[i])){
-                        fab.snackbar("${userList[i]}님은 이미 친구로 되어있습니다.")
+                        fab.snackbar("${userList[i]}님은 이미 구독하고 있습니다.")
                     }else{
-                        fab.snackbar("${userList[i]}님이 친구로 추가되었습니다.")
-                        FirebaseManager.getRef(FirebaseManager.getUserUid())?.child("friend")?.child(userList[i].replace(".",""))?.setValue(userList[i])
+                        fab.snackbar("${userList[i]}님이 구독 신청되었습니다.")
+                        FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("subscribe")?.child(reversed[userList[i]].toString())?.setValue(userList[i])
 //                    App.INSTANCE.myFriend.add(countries[i])
                     }
 
