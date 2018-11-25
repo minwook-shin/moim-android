@@ -32,10 +32,13 @@ object FirebaseManager{
     }
 
     fun uploadMyInformation(){
-        getRef(getUserUid())?.child("uid")?.setValue(getUserUid())
-        getRef(getUserUid())?.child("email")?.setValue(getUserEmail())
-        getRef(getUserUid())?.child("name")?.setValue("")
-        getRef("userList")?.child(getUserUid()!!)?.setValue(getUserEmail())
+        getRef("users")?.child(getUserUid()!!)?.child("uid")?.setValue(getUserUid())
+        getRef("users")?.child(getUserUid()!!)?.child("email")?.setValue(getUserEmail())
+        getRef("users")?.child(getUserUid()!!)?.child("name")?.setValue("")
+        getRef("users")?.child(getUserUid()!!)?.child("nickname")?.setValue("")
+        getRef("users")?.child(getUserUid()!!)?.child("birthday")?.setValue("")
+        getRef("users")?.child(getUserUid()!!)?.child("phone")?.setValue("")
+        getRef("users")?.child(getUserUid()!!)?.child("gender")?.setValue("")
     }
 
 }

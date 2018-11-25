@@ -22,7 +22,7 @@ class AppService : Service() {
 
 
     private fun myInformation() {
-        FirebaseManager.getRef(FirebaseManager.getUserUid())?.addChildEventListener(object : ChildEventListener {
+        FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid().toString())?.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
@@ -51,7 +51,7 @@ class AppService : Service() {
 
         })
 
-        FirebaseManager.getRef("userList")?.addChildEventListener(object:ChildEventListener{
+        FirebaseManager.getRef("users")?.addChildEventListener(object:ChildEventListener{
             override fun onCancelled(p0: DatabaseError) {
 
             }
@@ -60,12 +60,20 @@ class AppService : Service() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                App.INSTANCE.allUser.add(p0.value.toString())
+                for (snapshot in p0.children){
+                    if (snapshot.key == "email"){
+                        App.INSTANCE.allUser[p0.key.toString()] = snapshot.value.toString()
+                    }
+                }
+
             }
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                App.INSTANCE.allUser.add(p0.value.toString())
-            }
+                for (snapshot in p0.children){
+                    if (snapshot.key == "email"){
+                        App.INSTANCE.allUser[p0.key.toString()] = snapshot.value.toString()
+                    }
+                }            }
 
             override fun onChildRemoved(p0: DataSnapshot) {
             }

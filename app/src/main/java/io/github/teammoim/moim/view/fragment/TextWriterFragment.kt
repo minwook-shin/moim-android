@@ -36,9 +36,12 @@ class TextWriterFragment: BottomSheetDialogFragment(),View.OnClickListener{
             val cal = Calendar.getInstance()
 //            val sdf = SimpleDateFormat("HH:mm:ss")
 
-            App.INSTANCE.timelineArray.add(TimelineModel(FirebaseManager.getUserEmail()!!,"",contentView.chatEditText.text.toString()))
-            FirebaseManager.getRef("timeline")?.child(cal.timeInMillis.toString())?.child("name")?.setValue(FirebaseManager.getUserEmail())
-            FirebaseManager.getRef("timeline")?.child(cal.timeInMillis.toString())?.child("text")?.setValue(contentView.chatEditText.text.toString())
+            App.INSTANCE.timelineArray.add(TimelineModel(FirebaseManager.getUserEmail()!!,"",contentView.chatEditText.text.toString(),cal.timeInMillis.toString()))
+            FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("uid")?.setValue(FirebaseManager.getUserUid())
+            FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("text")?.setValue(contentView.chatEditText.text.toString())
+            FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("url")?.setValue("")
+            FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("postId")?.setValue(cal.timeInMillis.toString())
+
             this.dismiss()
         }
     }

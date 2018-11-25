@@ -48,7 +48,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
             noResult.remove()
         }
         val cal = Calendar.getInstance()
-        FirebaseManager.getRef("timeline")?.addListenerForSingleValueEvent(object : ValueEventListener{
+        FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
             }
             override fun onDataChange(p0: DataSnapshot) {
@@ -56,19 +56,21 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
                 App.INSTANCE.timelineArray.clear()
                 for (snapshot in p0.children){
 
-                    val tmp = TimelineModel("","","")
+                    val tmp = TimelineModel("","","","")
                     for (s in snapshot.children){
-                        if (s.key == "name"){
-                            tmp.name = s.value.toString()
+                        if (s.key == "uid"){
+                            tmp.name = App.INSTANCE.allUser[s.value.toString()].toString()
                         }
                         if (s.key == "text"){
                             tmp.text = s.value.toString()
+                        }
+                        if (s.key == "postId"){
+                            tmp.postId = s.value.toString()
                         }
 
                     }
                     App.INSTANCE.timelineArray.add(tmp)
                 }
-
                 addItem()
             }
 
@@ -86,7 +88,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
         timeline_list.layoutManager = mLayoutManager
-        timeline_list.adapter = TimelineRecyclerViewAdapter(activity!!.applicationContext, timelineList)
+        timeline_list.adapter = TimelineRecyclerViewAdapter(activity!!.applicationContext, timelineList,activity?.supportFragmentManager!!)
         timeline_list.setHasFixedSize(true)
 
     }
