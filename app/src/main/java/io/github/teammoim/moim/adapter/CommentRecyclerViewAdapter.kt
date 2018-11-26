@@ -16,16 +16,14 @@ import kotlinx.android.synthetic.main.recycler_view_comment_item.view.*
 import kotlinx.android.synthetic.main.recycler_view_timeline_item.view.*
 import org.jetbrains.anko.toast
 
-class CommentRecyclerViewAdapter(val context: Context, val dataSet: ArrayList<CommentModel>, fragmentManager : FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommentRecyclerViewAdapter(val context: Context, val dataSet: ArrayList<CommentModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mDataSet = ArrayList<CommentModel>()
     private var mInflater: LayoutInflater? = null
     private var mContext: Context? = null
-    private var mFragmentManager : FragmentManager
 
     init {
         mContext = context
         mDataSet = dataSet
-        mFragmentManager = fragmentManager
         mInflater = LayoutInflater.from(context)
     }
 
