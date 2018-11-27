@@ -39,42 +39,63 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_timeline,container,false)
+        return inflater.inflate(R.layout.fragment_timeline, container, false)
     }
+
     private var timelineList: ArrayList<TimelineModel> = ArrayList()
+    val reversed = App.INSTANCE.allUser.entries.associate { (k, v) -> v to k }
 
     override fun onRefresh() {
-        if (!App.INSTANCE.timelineArray.isEmpty()){
+        if (!App.INSTANCE.timelineArray.isEmpty()) {
             noResult.remove()
         }
         val cal = Calendar.getInstance()
-        FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.addListenerForSingleValueEvent(object : ValueEventListener{
+
+        App.INSTANCE.myFriend.clear()
+        FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("subscribe")?.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
+
             override fun onDataChange(p0: DataSnapshot) {
-                timelineList.clear()
-                App.INSTANCE.timelineArray.clear()
                 for (snapshot in p0.children){
+                    App.INSTANCE.myFriend.add(snapshot.value.toString())
 
-                    val tmp = TimelineModel("","","","")
-                    for (s in snapshot.children){
-                        if (s.key == "uid"){
-                            tmp.name = App.INSTANCE.allUser[s.value.toString()].toString()
-                        }
-                        if (s.key == "text"){
-                            tmp.text = s.value.toString()
-                        }
-                        if (s.key == "postId"){
-                            tmp.postId = s.value.toString()
-                        }
-
-                    }
-                    App.INSTANCE.timelineArray.add(tmp)
                 }
-                addItem()
-            }
+                FirebaseManager.getRef("post")?.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
 
+                    override fun onDataChange(p0: DataSnapshot) {
+                        timelineList.clear()
+                        App.INSTANCE.timelineArray.clear()
+                        App.INSTANCE.myFriend.add(FirebaseManager.getUserEmail().toString())
+                        for (snapshot in p0.children) {
+                            if (App.INSTANCE.myFriend.contains(App.INSTANCE.allUser[snapshot.key])) {
+                                for (snap in snapshot.children) {
+                                    val tmp = TimelineModel("", "", "", "", "")
+                                    for (s in snap.children) {
+                                        if (s.key == "uid") {
+                                            tmp.name = App.INSTANCE.allUser[s.value.toString()].toString()
+                                            tmp.uid = s.value.toString().toString()
+                                        }
+                                        if (s.key == "text") {
+                                            tmp.text = s.value.toString()
+                                        }
+                                        if (s.key == "postId") {
+                                            tmp.postId = s.value.toString()
+                                        }
+                                    }
+                                    App.INSTANCE.timelineArray.add(tmp)
+                                }
+                            }
+                        }
+                        addItem()
+                    }
+                })
+            }
         })
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -88,7 +109,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
         timeline_list.layoutManager = mLayoutManager
-        timeline_list.adapter = TimelineRecyclerViewAdapter(activity!!.applicationContext, timelineList,activity?.supportFragmentManager!!)
+        timeline_list.adapter = TimelineRecyclerViewAdapter(activity!!.applicationContext, timelineList, activity?.supportFragmentManager!!)
         timeline_list.setHasFixedSize(true)
 
     }
@@ -104,10 +125,9 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (App.INSTANCE.timelineArray.isEmpty()){
+        if (App.INSTANCE.timelineArray.isEmpty()) {
             noResult.addView(NoResult(this.activity!!.applicationContext))
-        }
-        else{
+        } else {
             noResult.remove()
         }
         super.onViewCreated(view, savedInstanceState)
@@ -120,9 +140,8 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
 
-
-    private fun connectViewModel(){
-        viewModel.model.observe(this,Observer<Int> {})
+    private fun connectViewModel() {
+        viewModel.model.observe(this, Observer<Int> {})
         lifecycle.addObserver(viewModel)
     }
 }

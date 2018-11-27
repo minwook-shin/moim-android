@@ -48,7 +48,7 @@ class TimelineRecyclerViewAdapter(val context: Context, val dataSet: ArrayList<T
             itemView.bodyText.text = data.text
             itemView.nameText.text = data.name
             itemView.commentButton.setOnClickListener {
-                val bottomSheetDialogFragment = CommentFragment(data.postId)
+                val bottomSheetDialogFragment = CommentFragment(data)
                 bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
             }
         }

@@ -30,22 +30,59 @@ import android.content.Context.WINDOW_SERVICE
 import androidx.core.content.ContextCompat.getSystemService
 import android.view.WindowManager
 import androidx.recyclerview.widget.RecyclerView
-
-
-
-
-
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 
 @SuppressLint("ValidFragment")
-class CommentFragment(val post : String): BottomSheetDialogFragment(),View.OnClickListener{
+class CommentFragment(val post : TimelineModel): BottomSheetDialogFragment(),View.OnClickListener{
     private var commentList: ArrayList<CommentModel> = ArrayList()
+
+    val adapter by lazy {CommentRecyclerViewAdapter(activity!!.applicationContext, commentList)}
+
     override fun onClick(v: View?) {
 
     }
 
     @SuppressLint("RestrictedApi", "SimpleDateFormat")
     override fun setupDialog(dialog: Dialog?, style: Int) {
-        commentList.add(CommentModel("test","testest"))
+        FirebaseManager.getRef("post")?.child(post.uid)?.child(post.postId)?.child("comments")?.addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val tmp = CommentModel("","")
+                for (snapshot in p0.children){
+                    if (snapshot.key == "text"){
+                        tmp.text = snapshot.value.toString()
+                    }
+                    if (snapshot.key == "uid"){
+                        tmp.uid = App.INSTANCE.allUser[snapshot.value.toString()].toString()
+                    }
+                }
+                commentList.add(tmp)
+                adapter.notifyItemInserted(0)
+
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                for (snapshot in p0.children){
+                    if (snapshot.key == "text"){
+                        commentList.add(CommentModel("test",snapshot.value.toString()))
+                        adapter.notifyItemInserted(0)
+
+                    }
+                }
+
+            }
+
+        })
         super.setupDialog(dialog, style)
         val contentView = View.inflate(context, R.layout.fragment_comment, null)
         dialog?.setContentView(contentView)
@@ -54,17 +91,17 @@ class CommentFragment(val post : String): BottomSheetDialogFragment(),View.OnCli
             val cal = Calendar.getInstance()
 //            val sdf = SimpleDateFormat("HH:mm:ss")
 
-            FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(post)?.child("comments")?.child("uid")?.setValue(FirebaseManager.getUserUid())
-            FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(post)?.child("comments")?.child("text")?.setValue(contentView.commentEditText.text.toString())
-
+            FirebaseManager.getRef("post")?.child(post.uid.toString())?.child(post.postId)?.child("comments")?.child(cal.timeInMillis.toString())?.child("uid")?.setValue(FirebaseManager.getUserUid())
+            FirebaseManager.getRef("post")?.child(post.uid.toString())?.child(post.postId)?.child("comments")?.child(cal.timeInMillis.toString())?.child("text")?.setValue(contentView.commentEditText.text.toString())
+            adapter.notifyItemInserted(0);
             this.dismiss()
         }
 
-        val adapter = CommentRecyclerViewAdapter(activity!!.applicationContext, commentList)
 
         val recyclerView = contentView!!.findViewById(R.id.comment_list) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
+        adapter.notifyItemInserted(0);
 
 
     }

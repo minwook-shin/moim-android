@@ -42,8 +42,6 @@ class FriendsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
                 }
                 addItem()
             }
-
-
         })
     }
 
