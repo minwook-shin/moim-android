@@ -51,17 +51,12 @@ class ARFragment : BaseFragment(){
         val overlayItemArrayList : ArrayList<OverlayItem> = ArrayList()
 
         val geoPoint = GeoPoint(37.6096409, 126.99769700000002)
-        val overlayItem = OverlayItem("국민대학교1", "종강 이벤트", geoPoint)
-        val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
+        val overlayItem = OverlayItem("1234567890", "국민대학교1","종강 이벤트", geoPoint)
+        val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.marker_default)
         overlayItem.setMarker(markerDrawable)
 
-        val geoPoint2 = GeoPoint(37.610155, 126.997041)
-        val markerDrawable2 = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.ic_launcher_foreground)
-        val overlayItem2 = OverlayItem("국민대학교2", "개강 이벤트", geoPoint2)
-        overlayItem2.setMarker(markerDrawable2)
 
         overlayItemArrayList.add(overlayItem)
-        overlayItemArrayList.add(overlayItem2)
         return overlayItemArrayList
     }
 

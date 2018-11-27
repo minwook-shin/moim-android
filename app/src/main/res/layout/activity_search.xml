@@ -39,14 +39,70 @@
     </Toolbar>
 
     <TextView
-        android:id="@+id/recentText"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="검색"
+        android:text="이벤트 등록"
         android:textStyle="bold"
-        android:textSize="@dimen/dp_72"
+        android:textSize="@dimen/dp_40"
         android:fontFamily="@font/nanum_gothic_regular"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/sp_16"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="제목"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/titleBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/introText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="소개"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/infotext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="원하는 곳을 길게 누르면 이벤트가 등록됩니다."
+        app:layout_constraintTop_toBottomOf="@id/textBox"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/sp_16"/>
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/infotext"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/sp_16"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
