@@ -20,9 +20,12 @@ class App : Application(){
     val timelineArray = ArrayList<TimelineModel>()
     val allUser = mutableMapOf<String?,String>()
     val myFriend = ArrayList<String>()
-    val geoPoint = ArrayList<GeoPoint>()
+    val geoPoint = ArrayList<LocationModel>()
+    val distanceMap = mutableMapOf<Double,LocationModel>()
 
 
+    var myLatitude : Double = 0.0
+    var myLongitude : Double = 0.0
 
     companion object {
         lateinit var INSTANCE: App

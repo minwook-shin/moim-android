@@ -115,8 +115,6 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     fun addItem() {
-
-        timeline_list.invalidate()
         timelineList = App.INSTANCE.timelineArray
         timeline_list.adapter?.notifyDataSetChanged()
         swipe.isRefreshing = false

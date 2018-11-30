@@ -70,7 +70,7 @@ class SearchActivity:BaseActivity(){
         map.setMultiTouchControls(true)
         map.isClickable = true
         map.controller.setZoom(19.0)
-        val startPoint = GeoPoint(37.6096409, 126.99769700000002)
+        val startPoint = GeoPoint(App.INSTANCE.myLatitude, App.INSTANCE.myLatitude)
         map.controller.setCenter(startPoint)
     }
 }

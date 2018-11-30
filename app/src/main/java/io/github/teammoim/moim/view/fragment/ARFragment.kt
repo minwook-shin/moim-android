@@ -18,11 +18,12 @@ import io.github.teammoim.moim.App
 import org.jetbrains.anko.longToast
 
 
-class ARFragment : BaseFragment(){
+class ARFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_ar,container,false)
+        return inflater.inflate(R.layout.fragment_ar, container, false)
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -32,8 +33,7 @@ class ARFragment : BaseFragment(){
 
         val locationOverlay = ItemizedIconOverlay(addPoint(), object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
             override fun onItemSingleTapUp(i: Int, overlayItem: OverlayItem): Boolean {
-                App.INSTANCE.longToast(overlayItem.title + " " + overlayItem.snippet)
-                val bottomSheetDialogFragment = EventInformationFragment()
+                val bottomSheetDialogFragment = EventInformationFragment(overlayItem)
                 bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
                 return true
             }
@@ -48,15 +48,16 @@ class ARFragment : BaseFragment(){
     }
 
     private fun addPoint(): ArrayList<OverlayItem> {
-        val overlayItemArrayList : ArrayList<OverlayItem> = ArrayList()
+        val overlayItemArrayList: ArrayList<OverlayItem> = ArrayList()
 
-        val geoPoint = GeoPoint(37.6096409, 126.99769700000002)
-        val overlayItem = OverlayItem("1234567890", "국민대학교1","종강 이벤트", geoPoint)
-        val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.marker_default)
-        overlayItem.setMarker(markerDrawable)
+        for (i in 0 until App.INSTANCE.geoPoint.size) {
+            val geoPoint = App.INSTANCE.geoPoint[i].point
+            val overlayItem = OverlayItem(App.INSTANCE.geoPoint[i].time, App.INSTANCE.geoPoint[i].title, App.INSTANCE.geoPoint[i].text, geoPoint)
+            val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.marker_default)
+            overlayItem.setMarker(markerDrawable)
 
-
-        overlayItemArrayList.add(overlayItem)
+            overlayItemArrayList.add(overlayItem)
+        }
         return overlayItemArrayList
     }
 
@@ -65,7 +66,7 @@ class ARFragment : BaseFragment(){
         map.setMultiTouchControls(true)
         map.isClickable = true
         map.controller.setZoom(19.0)
-        val startPoint = GeoPoint(37.6096409, 126.99769700000002)
+        val startPoint = GeoPoint(App.INSTANCE.myLatitude, App.INSTANCE.myLatitude)
         map.controller.setCenter(startPoint)
     }
 }
