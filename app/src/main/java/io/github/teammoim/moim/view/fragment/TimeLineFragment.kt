@@ -3,6 +3,7 @@ package io.github.teammoim.moim.view.fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,7 +73,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
                         for (snapshot in p0.children) {
                             if (App.INSTANCE.myFriend.contains(App.INSTANCE.allUser[snapshot.key])) {
                                 for (snap in snapshot.children) {
-                                    val tmp = TimelineModel("", "", "", "", "")
+                                    val tmp = TimelineModel("", 0.0, "", "", "")
                                     for (s in snap.children) {
                                         if (s.key == "uid") {
                                             tmp.name = App.INSTANCE.allUser[s.value.toString()].toString()
@@ -85,6 +86,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
                                             tmp.postId = s.value.toString()
                                         }
                                     }
+                                    tmp.date = snap.key.toString().toDouble()
                                     App.INSTANCE.timelineArray.add(tmp)
                                 }
                             }
@@ -98,6 +100,8 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     }
 
+    fun timelineSortUid(p: TimelineModel): Double = p.date.toDouble()
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         swipe.setOnRefreshListener(this)
@@ -109,6 +113,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         mLayoutManager.reverseLayout = true
         mLayoutManager.stackFromEnd = true
         timeline_list.layoutManager = mLayoutManager
+        Log.d("timeline",timelineList.toString())
         timeline_list.adapter = TimelineRecyclerViewAdapter(activity!!.applicationContext, timelineList, activity?.supportFragmentManager!!)
         timeline_list.setHasFixedSize(true)
 
@@ -116,6 +121,7 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     fun addItem() {
         timelineList = App.INSTANCE.timelineArray
+        timelineList.sortBy { timelineSortUid(it)  }
         timeline_list.adapter?.notifyDataSetChanged()
         swipe.isRefreshing = false
 
