@@ -31,6 +31,16 @@ class AppService : Service() {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 if (p0.key.equals("email"))
                     App.INSTANCE.myInfo.Email = p0.value.toString()
+                if (p0.key.equals("birthday"))
+                    App.INSTANCE.myInfo.birthday = p0.value.toString()
+                if (p0.key.equals("gender"))
+                    App.INSTANCE.myInfo.gender = p0.value.toString()
+                if (p0.key.equals("name"))
+                    App.INSTANCE.myInfo.name = p0.value.toString()
+                if (p0.key.equals("nickname"))
+                    App.INSTANCE.myInfo.nickname = p0.value.toString()
+                if (p0.key.equals("phone"))
+                    App.INSTANCE.myInfo.phone = p0.value.toString()
 
                 if(p0.key.equals("friend")){
                     for(snapshot in p0.children){
@@ -49,6 +59,12 @@ class AppService : Service() {
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
                 if (p0.key.equals("email"))
                     App.INSTANCE.myInfo.Email = p0.value.toString()
+
+                if(p0.key.equals("friend")){
+                    for(snapshot in p0.children){
+                        App.INSTANCE.myFriend.add(snapshot.value.toString())
+                    }
+                }
             }
 
         })

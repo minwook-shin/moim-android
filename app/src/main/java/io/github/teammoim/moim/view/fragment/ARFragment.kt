@@ -66,7 +66,7 @@ class ARFragment : BaseFragment() {
         map.setMultiTouchControls(true)
         map.isClickable = true
         map.controller.setZoom(19.0)
-        val startPoint = GeoPoint(App.INSTANCE.myLatitude, App.INSTANCE.myLatitude)
+        val startPoint = GeoPoint(App.INSTANCE.myLatitude, App.INSTANCE.myLongitude)
         map.controller.setCenter(startPoint)
     }
 }

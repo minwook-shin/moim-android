@@ -16,7 +16,7 @@ class App : Application(){
         super.onCreate()
     }
 
-    var myInfo = MyInformationModel("","")
+    var myInfo = MyInformationModel("","","","","","","")
     val timelineArray = ArrayList<TimelineModel>()
     val allUser = mutableMapOf<String?,String>()
     val myFriend = ArrayList<String>()

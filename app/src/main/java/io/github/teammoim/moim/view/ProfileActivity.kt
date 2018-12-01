@@ -17,6 +17,13 @@ class ProfileActivity:BaseActivity(){
             this.onBackPressed()
         }
 
-        nameTextView.text = App.INSTANCE.myInfo.Email
+        nameTextView.text = App.INSTANCE.myInfo.name
+        emailTextView.text = App.INSTANCE.myInfo.Email
+        nickNameTextView.text = App.INSTANCE.myInfo.nickname
+        genderTextView.text = App.INSTANCE.myInfo.gender
+        birthdayTextView.text = App.INSTANCE.myInfo.birthday
+        phoneTextView.text = App.INSTANCE.myInfo.phone
+
+
     }
 }
