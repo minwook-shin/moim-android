@@ -182,6 +182,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             FirebaseManager.uploadMyInformation()
         }
 
+
+
         account.setOnClickListener {
             startActivity<ProfileActivity>()
         }
@@ -195,6 +197,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             camera_fab.hide()
         }
         startLocation()
+
+
     }
 
 

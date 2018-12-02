@@ -20,7 +20,6 @@ import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_textwriter.*
 import kotlinx.android.synthetic.main.fragment_timeline.*
-import org.jetbrains.anko.toast
 import android.widget.EditText
 import com.blankj.utilcode.util.SnackbarUtils.dismiss
 import android.widget.ImageButton
@@ -30,8 +29,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import io.github.teammoim.moim.common.remove
+import io.github.teammoim.moim.view.EditInformationActivity
 import io.github.teammoim.moim.view.custom.NoResult
-import org.jetbrains.anko.longToast
+import org.jetbrains.anko.*
 import java.util.*
 
 
@@ -73,11 +73,12 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
                         for (snapshot in p0.children) {
                             if (App.INSTANCE.myFriend.contains(App.INSTANCE.allUser[snapshot.key])) {
                                 for (snap in snapshot.children) {
-                                    val tmp = TimelineModel("", 0.0, "", "", "")
+                                    val tmp = TimelineModel("","", 0.0, "", "", "")
                                     for (s in snap.children) {
                                         if (s.key == "uid") {
-                                            tmp.name = App.INSTANCE.allUser[s.value.toString()].toString()
-                                            tmp.uid = s.value.toString().toString()
+                                            tmp.email = App.INSTANCE.allUser[s.value.toString()].toString()
+                                            tmp.name = App.INSTANCE.findName[s.value.toString()].toString()
+                                            tmp.uid = s.value.toString()
                                         }
                                         if (s.key == "text") {
                                             tmp.text = s.value.toString()
@@ -138,8 +139,17 @@ class TimeLineFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         connectViewModel()
 
         fab.setOnClickListener {
-            val bottomSheetDialogFragment = TextWriterFragment()
-            bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
+            if (App.INSTANCE.myInfo.name == ""||App.INSTANCE.myInfo.nickname == ""||App.INSTANCE.myInfo.Email == ""){
+                activity?.alert("사용자의 필수 정보가 아직 부족합니다. 추가해주세요.", getString(R.string.okay)) {
+                    yesButton {
+                        activity?.startActivity<EditInformationActivity>()
+                    }
+                }?.show()
+            }else{
+                val bottomSheetDialogFragment = TextWriterFragment()
+                bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
+            }
+
         }
     }
 

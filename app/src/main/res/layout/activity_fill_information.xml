@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정보 수정"
+        android:textStyle="bold"
+        android:textSize="@dimen/dp_40"
+        android:fontFamily="@font/nanum_gothic_regular"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/sp_16"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이메일 (가입 이메일 유지)"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/emailBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nicknameBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/nameBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nicknameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="닉네임"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/birthdayTextViewBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/nicknameBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birthdayText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="생일 (선택사항)"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/genderBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/birthdayTextViewBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/genderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="성별(M/F (선택사항))"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@id/genderBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="전화번호 (선택사항)"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/infotext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="추가하고 싶은 정보만 입력하고 확인 버튼을 누르세요."
+        app:layout_constraintTop_toBottomOf="@id/phoneBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/sp_16"/>
+
+    <Button
+        android:id="@+id/pushButton"
+        android:text="해당 정보로 업데이트"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/infotext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/sp_16"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

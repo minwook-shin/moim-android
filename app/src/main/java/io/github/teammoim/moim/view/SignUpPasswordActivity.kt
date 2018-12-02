@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.NetworkUtils
 import io.github.teammoim.moim.App
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
+import io.github.teammoim.moim.common.FirebaseManager
 import io.github.teammoim.moim.common.show
 import io.github.teammoim.moim.viewModel.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_signup_password.*
@@ -34,6 +35,12 @@ class SignUpPasswordActivity : BaseActivity() {
                 loading.show()
                 val password = passwordText.text.toString()
                 viewModel.signUp(email, password, loading)
+
+                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("name")?.setValue("")
+                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("nickname")?.setValue("")
+                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("birthday")?.setValue("")
+                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("phone")?.setValue("")
+                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("gender")?.setValue("")
             }
         }
     }

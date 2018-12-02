@@ -2,6 +2,7 @@ package io.github.teammoim.moim
 
 data class TimelineModel(
         var name : String,
+        var email : String,
         var date : Double,
         var text : String,
         var postId : String,

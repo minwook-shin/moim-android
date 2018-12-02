@@ -17,17 +17,16 @@
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
         android:text="이름 "
         android:layout_weight="1"
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/followButton"
+        android:id="@+id/removeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="followed"
-        android:enabled="false"
+        android:text="구독 취소하기"
         android:layout_gravity="end"
         android:layout_weight="0.1"/>
 </LinearLayout>

@@ -36,7 +36,7 @@ class TextWriterFragment: BottomSheetDialogFragment(),View.OnClickListener{
             val cal = Calendar.getInstance()
 //            val sdf = SimpleDateFormat("HH:mm:ss")
 
-            App.INSTANCE.timelineArray.add(TimelineModel(FirebaseManager.getUserEmail()!!,0.0,contentView.chatEditText.text.toString(),cal.timeInMillis.toString(),FirebaseManager.getUserUid().toString()))
+            App.INSTANCE.timelineArray.add(TimelineModel(App.INSTANCE.myInfo.name,FirebaseManager.getUserEmail()!!,cal.timeInMillis.toDouble(),contentView.chatEditText.text.toString(),cal.timeInMillis.toString(),FirebaseManager.getUserUid().toString()))
             FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("uid")?.setValue(FirebaseManager.getUserUid())
             FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("text")?.setValue(contentView.chatEditText.text.toString())
             FirebaseManager.getRef("post")?.child(FirebaseManager.getUserUid().toString())?.child(cal.timeInMillis.toString())?.child("url")?.setValue("")

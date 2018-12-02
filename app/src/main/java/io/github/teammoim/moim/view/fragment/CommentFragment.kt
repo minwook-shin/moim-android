@@ -54,7 +54,7 @@ class CommentFragment(val post : TimelineModel): BottomSheetDialogFragment(),Vie
                         tmp.text = snapshot.value.toString()
                     }
                     if (snapshot.key == "uid"){
-                        tmp.uid = App.INSTANCE.allUser[snapshot.value.toString()].toString()
+                        tmp.uid = App.INSTANCE.findName[snapshot.value.toString()].toString()
                     }
                 }
                 commentList.add(tmp)

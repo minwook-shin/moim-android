@@ -19,6 +19,7 @@ class App : Application(){
     var myInfo = MyInformationModel("","","","","","","")
     val timelineArray = ArrayList<TimelineModel>()
     val allUser = mutableMapOf<String?,String>()
+    val findName = mutableMapOf<String?,String>()
     val myFriend = ArrayList<String>()
     val geoPoint = ArrayList<LocationModel>()
     val distanceMap = mutableMapOf<Double,LocationModel>()
