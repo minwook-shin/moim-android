@@ -30,17 +30,13 @@ class SignUpPasswordActivity : BaseActivity() {
 
         passwordContinueButton.setOnClickListener {
             if (!viewModel.checkPassword(passwordText.text.toString())) {
-                passwordContinueButton.snackbar("비밀번호는 6자리 이상이여야 합니다.")
+                passwordContinueButton.snackbar("비밀번호는 8자리 이상이여야 합니다.")
             } else {
                 loading.show()
                 val password = passwordText.text.toString()
                 viewModel.signUp(email, password, loading)
 
-                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("name")?.setValue("")
-                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("nickname")?.setValue("")
-                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("birthday")?.setValue("")
-                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("phone")?.setValue("")
-                FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("gender")?.setValue("")
+
             }
         }
     }
