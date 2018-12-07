@@ -16,10 +16,6 @@ Kotlin
 
 1. Build on your Android studio.
 
-## Playstore Link
-
-WIP
-
 ## License
 
 This project is licensed under the GPL3 License - see the [LICENSE.md](LICENSE) file for details

@@ -14,7 +14,7 @@ import org.jetbrains.anko.*
 
 class SignUpViewModel : ViewModel(), LifecycleObserver {
     fun checkEmail(v : String): Boolean = RegexUtils.isEmail(v)
-    fun checkPassword(v : String):Boolean = StringUtils.length(v) > 5
+    fun checkPassword(v : String):Boolean = StringUtils.length(v) > 7
 
     fun signUp(email: String, password: String, loading: ProgressBar){
         FirebaseManager.getEmailSignUp(email,password).addOnCompleteListener{
@@ -22,6 +22,11 @@ class SignUpViewModel : ViewModel(), LifecycleObserver {
             if (it.isSuccessful) {
             App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_success))
             App.INSTANCE.startActivity(App.INSTANCE.intentFor<MainActivity>().newTask())}
+            FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("name")?.setValue("")
+            FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("nickname")?.setValue("")
+            FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("birthday")?.setValue("")
+            FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("phone")?.setValue("")
+            FirebaseManager.getRef("users")?.child(FirebaseManager.getUserUid()!!)?.child("gender")?.setValue("")
         }.addOnCanceledListener {
             App.INSTANCE.longToast(App.INSTANCE.getString(R.string.signup_fail))
         }.addOnFailureListener {

@@ -11,12 +11,12 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="6dp"
-        android:text="이벤트 이름"
+        android:text="이 곳에서 가장 근접한 이벤트"
         android:textAlignment="center" />
 
     <Button
         android:id="@+id/informationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="세부사항 보기"/>
+        android:text="바로가기"/>
 </LinearLayout>

@@ -3,6 +3,7 @@ package io.github.teammoim.moim
 import android.app.Application
 import android.content.Intent
 import io.github.teammoim.moim.common.AppSharedPreferences
+import org.osmdroid.util.GeoPoint
 
 class App : Application(){
     init {
@@ -15,8 +16,17 @@ class App : Application(){
         super.onCreate()
     }
 
-    var myInfo = MyInformationModel("","")
+    var myInfo = MyInformationModel("","","","","","","")
     val timelineArray = ArrayList<TimelineModel>()
+    val allUser = mutableMapOf<String?,String>()
+    val findName = mutableMapOf<String?,String>()
+    val myFriend = ArrayList<String>()
+    val geoPoint = ArrayList<LocationModel>()
+    val distanceMap = mutableMapOf<Double,LocationModel>()
+
+
+    var myLatitude : Double = 0.0
+    var myLongitude : Double = 0.0
 
     companion object {
         lateinit var INSTANCE: App

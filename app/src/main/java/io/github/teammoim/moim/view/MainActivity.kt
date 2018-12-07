@@ -25,8 +25,7 @@ import android.view.WindowManager
 import com.google.ar.core.Session
 import com.google.ar.core.exceptions.*
 import android.content.Intent
-
-
+import io.github.teammoim.moim.App
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnLocationUpdatedListener, OnActivityUpdatedListener, OnGeofencingTransitionListener {
@@ -183,6 +182,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             FirebaseManager.uploadMyInformation()
         }
 
+
+
         account.setOnClickListener {
             startActivity<ProfileActivity>()
         }
@@ -196,6 +197,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             camera_fab.hide()
         }
         startLocation()
+
+
     }
 
 
@@ -219,7 +222,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         smartLocation.activity().start(this)
         val lastLocation = SmartLocation.with(this).location().lastLocation
         if (lastLocation != null) {
-            toast(lastLocation.latitude.toString() + " " + lastLocation.longitude.toString())
+            App.INSTANCE.myLatitude = lastLocation.latitude
+            App.INSTANCE.myLongitude = lastLocation.longitude
         }
     }
 

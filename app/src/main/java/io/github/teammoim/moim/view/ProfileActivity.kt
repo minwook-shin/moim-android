@@ -6,6 +6,7 @@ import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseActivity
 import io.github.teammoim.moim.common.FirebaseManager
 import kotlinx.android.synthetic.main.activity_profile.*
+import org.jetbrains.anko.startActivity
 
 class ProfileActivity:BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +18,17 @@ class ProfileActivity:BaseActivity(){
             this.onBackPressed()
         }
 
-        nameTextView.text = App.INSTANCE.myInfo.Email
+        editInfo_button.setOnClickListener {
+            startActivity<EditInformationActivity>()
+        }
+
+        nameTextView.text = App.INSTANCE.myInfo.name
+        emailTextView.text = App.INSTANCE.myInfo.Email
+        nickNameTextView.text = App.INSTANCE.myInfo.nickname
+        genderTextView.text = App.INSTANCE.myInfo.gender
+        birthdayTextView.text = App.INSTANCE.myInfo.birthday
+        phoneTextView.text = App.INSTANCE.myInfo.phone
+
+
     }
 }

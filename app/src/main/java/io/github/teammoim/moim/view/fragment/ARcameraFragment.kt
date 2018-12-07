@@ -2,12 +2,14 @@ package io.github.teammoim.moim.view.fragment
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import io.github.teammoim.moim.R
 import io.github.teammoim.moim.base.BaseFragment
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.TransformableNode
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import com.google.ar.core.*
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.ux.ArFragment
@@ -16,6 +18,11 @@ import org.jetbrains.anko.toast
 import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.assets.RenderableSource
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.OverlayItem
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.round
 
 
 class ARcameraFragment : BaseFragment() {
@@ -66,8 +73,23 @@ class ARcameraFragment : BaseFragment() {
                     testViewRenderable = renderable
                     val button: Button = testViewRenderable.view.findViewById(R.id.informationButton) as Button
                     button.setOnClickListener {
-                        val bottomSheetDialogFragment = EventInformationFragment()
-                        bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
+
+                        val myGeoPoint = GeoPoint(App.INSTANCE.myLatitude,App.INSTANCE.myLongitude)
+                        for (i in 0 until App.INSTANCE.geoPoint.size){
+                            val arr = myGeoPoint.distanceToAsDouble(App.INSTANCE.geoPoint[i].point).toString().split(".")
+                            App.INSTANCE.distanceMap[arr[0].toDouble()] = App.INSTANCE.geoPoint[i]
+                        }
+                        val result = App.INSTANCE.distanceMap.toList().sortedBy { (key, _) -> key}.toMap()
+                        for((i,j)in result){
+                            val overlayItem = OverlayItem(j.time, j.title,j.text, j.point)
+                            val markerDrawable = ContextCompat.getDrawable(activity!!.applicationContext, R.drawable.marker_default)
+                            overlayItem.setMarker(markerDrawable)
+                            val bottomSheetDialogFragment = EventInformationFragment(overlayItem)
+                            bottomSheetDialogFragment.show(activity?.supportFragmentManager, bottomSheetDialogFragment.tag)
+                            break
+                        }
+
+
                     }
                 }
 

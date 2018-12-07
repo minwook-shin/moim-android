@@ -26,28 +26,4 @@
         android:textSize="@dimen/dp_40"
 
         android:text="Description"/>
-
-    <Button
-        android:id="@+id/joinRequest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="참석 요청하기"/>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/chatBox"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/chatText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="후기 남기기"
-            android:inputType="textPersonName"
-            android:singleLine="true"
-            android:fontFamily="@font/nanum_gothic_regular"/>
-    </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
